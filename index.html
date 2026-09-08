@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAC ফাইনাল এক্সাম প্রস্তুতি | Created by: Tys Tasin</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Hind Siliguri for crystal-clear Bengali text -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,402 +15,487 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Hind Siliguri"', 'sans-serif'],
+            bengali: ['"Hind Siliguri"', 'sans-serif'],
           }
         }
       }
     }
   </script>
   <style>
-    body { font-family: 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #94a3b8;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-24 select-none antialiased">
 
-  <!-- TOP HEADER -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="bg-sky-50 text-sky-600 text-xs font-semibold px-3 py-1.5 rounded-full border border-sky-200">
-          ⚡ CREATED BY: TYS TASIN
-        </span>
-      </div>
-      <div class="flex items-center space-x-2">
-        <button id="adminBtn" class="text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5">
-          <span>🔒</span> অ্যাডমিন এক্সেস ও শিট সেটআপ
+  <!-- Header Section -->
+  <header class="bg-white border-b border-slate-200 shadow-sm relative">
+    <div class="max-w-4xl mx-auto px-4 py-5 text-center">
+      
+      <!-- Top Action Bar: Admin and Config Buttons -->
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <div class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-700 border border-sky-200 text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xs tracking-wide">
+          <span>⚡ CREATED BY: TYS TASIN</span>
+        </div>
+
+        <!-- Prominent Admin Button -->
+        <button onclick="handleAdminButtonClick()" id="adminTriggerBtn" type="button" class="text-xs sm:text-sm font-bold text-slate-700 hover:text-sky-700 transition flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-xl border border-amber-300 shadow-sm cursor-pointer">
+          <span id="adminLockIcon">🔒</span> 
+          <span id="adminStatusText">অ্যাডমিন এক্সেস ও শিট সেটআপ</span>
         </button>
+      </div>
+
+      <!-- Proper Semantic Headings -->
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mt-1">
+        RAC ফাইনাল এক্সাম প্রস্তুতি
+      </h1>
+      <h2 class="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+        লেভেল-১ লিখিত প্রশ্ন সাজেশন টেস্ট • মোট ৭৩টি বহুনির্বাচনি প্রশ্ন (MCQ)
+      </h2>
+
+      <!-- Active Student Info Pill -->
+      <div id="studentPill" class="hidden mt-2.5 inline-flex items-center gap-2 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full shadow-xs">
+        <span>👤 পরীক্ষার্থী: <strong id="studentPillName"></strong></span>
+        <button onclick="handleChangeUser()" type="button" class="text-sky-600 underline text-[11px] hover:text-sky-800 cursor-pointer">পরিবর্তন</button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6">
-    <!-- TITLE CARD -->
-    <div class="text-center mb-6">
-      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">RAC ফাইনাল এক্সাম প্রস্তুতি</h1>
-      <p class="text-slate-500 text-sm">লেভেল-১, লিখিত প্রশ্ন সাজেশন টেস্ট • মোট ৭৩টি বহুনির্বাচনি প্রশ্ন (MCQ)</p>
-      
-      <!-- Student Info Pill -->
-      <div id="studentPill" class="mt-3 inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-700 text-xs px-3.5 py-1.5 rounded-full shadow-xs">
-        <span>👤 পরীক্ষার্থী: <strong id="studentPillName" class="text-slate-900 font-bold">---</strong></span>
-        <button id="changeStudentBtn" class="text-sky-600 hover:underline font-semibold ml-1">পরিবর্তন</button>
+  <div class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3">
+      <!-- Live Counters -->
+      <div class="flex flex-wrap items-center justify-between gap-2.5">
+        <div class="flex items-center flex-wrap gap-2.5 text-sm sm:text-base">
+          <div class="bg-sky-50 text-sky-800 font-bold px-3 py-1 rounded-lg border border-sky-200 flex items-center gap-1.5 shadow-sm">
+            <span class="text-xs uppercase text-sky-600 font-bold">স্কোর:</span>
+            <span id="scoreText" class="text-lg text-sky-900 font-extrabold">০</span>
+            <span class="text-xs text-slate-500">/ ৭৩</span>
+          </div>
+
+          <div class="text-xs sm:text-sm font-medium text-slate-600">
+            উত্তর সম্পন্ন: <span id="answeredText" class="font-bold text-slate-900">০</span>/৭৩
+          </div>
+
+          <!-- Attempts Remaining Badge -->
+          <div id="attemptBadge" class="text-xs font-bold px-2.5 py-1 rounded-lg border flex items-center gap-1 shadow-sm">
+            <!-- Dynamic attempt text inserted by JS -->
+          </div>
+        </div>
+
+        <!-- Jump Navigation & Finish/Reset Controls -->
+        <div class="flex items-center gap-2">
+          <button onclick="toggleNavModal()" type="button" class="px-3 py-1.5 text-xs sm:text-sm font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition cursor-pointer">
+            🧭 প্রশ্ন তালিকা
+          </button>
+          <button onclick="submitFinalExam()" type="button" class="px-3 py-1.5 text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition shadow-sm cursor-pointer">
+            ✓ শেষ করো
+          </button>
+          <button onclick="confirmReset()" type="button" class="px-3 py-1.5 text-xs sm:text-sm font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg border border-rose-300 transition shadow-sm cursor-pointer">
+            🔄 নতুন পরীক্ষা
+          </button>
+        </div>
+      </div>
+
+      <!-- Linear Progress Bar -->
+      <div class="w-full bg-slate-200 h-2 rounded-full mt-2.5 overflow-hidden">
+        <div id="progressBar" class="bg-sky-500 h-2 rounded-full transition-all duration-300 w-0"></div>
+      </div>
+
+      <!-- Interactive Filter Buttons -->
+      <div class="flex items-center gap-2 mt-2.5 overflow-x-auto pb-1 text-xs custom-scrollbar">
+        <span class="text-slate-500 font-semibold whitespace-nowrap">ফিল্টার:</span>
+        <button onclick="setFilter('all')" id="btnFilterAll" type="button" class="px-3 py-1 rounded-md bg-sky-600 text-white font-bold transition whitespace-nowrap shadow-sm cursor-pointer">সবগুলো (৭৩)</button>
+        <button onclick="setFilter('unanswered')" id="btnFilterUnanswered" type="button" class="px-3 py-1 rounded-md bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200 border border-slate-300 transition whitespace-nowrap cursor-pointer">উত্তর বাকি (<span id="countUnanswered">৭৩</span>)</button>
+        <button onclick="setFilter('correct')" id="btnFilterCorrect" type="button" class="px-3 py-1 rounded-md bg-emerald-50 text-emerald-800 font-semibold border border-emerald-300 hover:bg-emerald-100 transition whitespace-nowrap cursor-pointer">সঠিক (<span id="countCorrect">০</span>)</button>
+        <button onclick="setFilter('incorrect')" id="btnFilterIncorrect" type="button" class="px-3 py-1 rounded-md bg-rose-50 text-rose-800 font-semibold border border-rose-300 hover:bg-rose-100 transition whitespace-nowrap cursor-pointer">ভুল (<span id="countIncorrect">০</span>)</button>
       </div>
     </div>
+  </div>
 
-    <!-- ACTION / STATS BAR -->
-    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-4 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex flex-wrap items-center gap-2">
-        <div class="bg-sky-50 border border-sky-200 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1">
-          স্কোর: <span id="scoreBadge">০</span> / ৭৩
-        </div>
-        <div class="text-slate-600 text-xs font-medium px-2 py-1.5">
-          উত্তর সম্পন্ন: <span id="answeredCountBadge" class="font-bold text-slate-800">০/৭৩</span>
-        </div>
-        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1">
-          🎯 সুযোগ বাকি: <span id="chancesBadge">২/২</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button id="quickNavBtn" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-3 py-2 rounded-lg transition-colors flex items-center gap-1">
-          🧭 প্রশ্ন তালিকা
-        </button>
-        <button id="finishExamBtn" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-xs flex items-center gap-1">
-          ✓ শেষ করো
-        </button>
-        <button id="restartExamBtn" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold px-3 py-2 rounded-lg transition-colors flex items-center gap-1">
-          🔄 নতুন পরীক্ষা
-        </button>
-      </div>
+  <!-- Live Sync Status Banner -->
+  <div id="syncBanner" class="hidden max-w-4xl mx-auto px-4 mt-2">
+    <div class="bg-sky-50 text-sky-800 text-xs py-1.5 px-3 rounded-lg border border-sky-200 flex items-center justify-between">
+      <span id="syncText">📡 গুগল শিটে ডাটা পাঠানো হচ্ছে...</span>
+      <span class="animate-pulse font-black text-sky-600">●</span>
     </div>
+  </div>
 
-    <!-- PROGRESS BAR -->
-    <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mb-5">
-      <div id="progressBar" class="bg-sky-500 h-full w-0 transition-all duration-300"></div>
+  <!-- Main Question Cards Container -->
+  <main class="max-w-4xl mx-auto px-4 py-6">
+    <div id="emptyNotice" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200 my-4 shadow-sm">
+      <p class="text-slate-500 font-medium text-base">এই ফিল্টারে কোনো প্রশ্ন পাওয়া যায়নি।</p>
     </div>
-
-    <!-- FILTER BAR -->
-    <div class="flex items-center gap-2 mb-5 overflow-x-auto pb-1 text-xs">
-      <span class="text-slate-400 font-medium">ফিল্টার:</span>
-      <button onclick="setFilter('all')" id="filterAll" class="filter-btn bg-sky-600 text-white font-bold px-3 py-1 rounded-md">সবগুলো (৭৩)</button>
-      <button onclick="setFilter('unanswered')" id="filterUnanswered" class="filter-btn bg-white border border-slate-200 text-slate-700 font-medium px-3 py-1 rounded-md">উত্তর বাকি (<span id="unansweredCount">৭৩</span>)</button>
-      <button onclick="setFilter('correct')" id="filterCorrect" class="filter-btn bg-white border border-slate-200 text-emerald-700 font-medium px-3 py-1 rounded-md">সঠিক (<span id="correctFilterCount">০</span>)</button>
-      <button onclick="setFilter('wrong')" id="filterWrong" class="filter-btn bg-white border border-slate-200 text-rose-700 font-medium px-3 py-1 rounded-md">ভুল (<span id="wrongFilterCount">০</span>)</button>
-    </div>
-
-    <!-- QUESTIONS CONTAINER -->
-    <div id="quizContainer" class="space-y-4"></div>
+    <div id="questionsContainer" class="space-y-4"></div>
   </main>
 
-  <!-- MODALS -->
-  <!-- 1. Student Info Modal -->
-  <div id="studentModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-      <div class="text-center mb-5">
-        <div class="inline-flex items-center justify-center w-12 h-12 bg-sky-100 text-sky-600 rounded-full mb-3 text-xl font-bold">✍️</div>
-        <h2 class="text-xl font-bold text-slate-900">পরীক্ষার্থীর তথ্য</h2>
-        <p class="text-xs text-slate-500 mt-1">শুরু করার আগে তোমার নাম ও রোল নম্বর দাও</p>
+  <!-- Modal: Student Entry Form -->
+  <div id="studentModal" class="fixed inset-0 bg-slate-900/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+      <div class="text-center mb-4">
+        <div class="w-12 h-12 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+          ✍️
+        </div>
+        <h3 class="font-bold text-slate-900 text-xl">পরীক্ষার্থীর পরিচিতি</h3>
+        <p class="text-xs text-slate-500 mt-1">পরীক্ষা শুরুর পূর্বে তোমার সঠিক তথ্য দাও। ফলাফল স্বয়ংক্রিয়ভাবে গুগল শিটে জমা হবে।</p>
       </div>
 
-      <form id="studentForm" class="space-y-4">
+      <form onsubmit="handleStartExamWithStudent(event)" class="space-y-3.5">
         <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">পূর্ণ নাম:</label>
-          <input type="text" id="studentNameInput" required placeholder="উদাঃ মোঃ রিফাত তাসিন" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500">
+          <label for="studentNameInput" class="block text-xs font-semibold text-slate-700 mb-1">তোমার পুরো নাম <span class="text-rose-500">*</span>:</label>
+          <input type="text" id="studentNameInput" required placeholder="যেমন: মো: রাকিবুল ইসলাম" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
         </div>
+
         <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">রোল / রেজিস্ট্রেশন নম্বর:</label>
-          <input type="text" id="studentInfoInput" required placeholder="উদাঃ RAC-2026-001" class="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500">
+          <label for="studentInfoInput" class="block text-xs font-semibold text-slate-700 mb-1">রোল নম্বর / মোবাইল নম্বর / ব্যাচ <span class="text-rose-500">*</span>:</label>
+          <input type="text" id="studentInfoInput" required placeholder="যেমন: Roll-12 বা 017xxxxxxxx" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
         </div>
-        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors shadow-xs">
-          পরীক্ষা শুরু করো
+
+        <button type="submit" class="w-full mt-2 py-3 rounded-xl font-bold text-sm bg-sky-600 hover:bg-sky-500 text-white shadow-md transition cursor-pointer">
+          🚀 পরীক্ষা শুরু করো
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 2. Admin Modal -->
-  <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-base font-bold text-slate-900">অ্যাডমিন কন্ট্রোল প্যানেল</h3>
-        <button id="closeAdminBtn" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+  <!-- Modal: Exam Result Summary -->
+  <div id="resultModal" class="fixed inset-0 bg-slate-900/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+      <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3 text-2xl font-bold">
+        🏆
       </div>
-      <div class="space-y-4 text-xs">
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">গুগল শিট Web App URL:</label>
-          <input type="text" id="adminSheetUrlInput" class="w-full text-xs font-mono px-3 py-2 border border-slate-300 rounded-lg">
-        </div>
-        <button id="saveAdminSheetBtn" class="w-full bg-teal-600 text-white py-2 rounded-lg font-semibold hover:bg-teal-700">
-          লিংক সেভ করুন
+      <h3 class="font-bold text-slate-900 text-xl">পরীক্ষা সম্পন্ন হয়েছে!</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4">তোমার ফলাফল সফলভাবে গুগল শিটে জমা হয়ে গেছে।</p>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left space-y-2 text-sm mb-5">
+        <div class="flex justify-between"><span class="text-slate-500">নাম:</span> <strong id="resName" class="text-slate-800"></strong></div>
+        <div class="flex justify-between"><span class="text-slate-500">মোট প্রশ্ন:</span> <strong class="text-slate-800">৭৩ টি</strong></div>
+        <div class="flex justify-between"><span class="text-slate-500">সঠিক উত্তর:</span> <strong id="resCorrect" class="text-emerald-600 font-bold"></strong></div>
+        <div class="flex justify-between"><span class="text-slate-500">ভুল উত্তর:</span> <strong id="resWrong" class="text-rose-600 font-bold"></strong></div>
+        <div class="flex justify-between border-t pt-2 border-slate-200"><span class="text-slate-700 font-bold">শতকরা নম্বর:</span> <strong id="resPercent" class="text-sky-600 font-extrabold text-base"></strong></div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closeResultModal()" type="button" class="w-full py-2.5 rounded-lg text-sm font-bold bg-slate-800 hover:bg-slate-900 text-white shadow-sm cursor-pointer">
+          খাতা ও সঠিক উত্তর রিভিউ দেখো
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 3. Result Modal -->
-  <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 text-center">
-      <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">🏆</div>
-      <h2 class="text-2xl font-bold text-slate-900">পরীক্ষা সম্পন্ন!</h2>
-      <p id="resName" class="text-sm font-semibold text-slate-600 mt-1"></p>
-
-      <div class="my-6 p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-sm">
-        <div class="flex justify-between"><span class="text-slate-500">সঠিক উত্তর:</span><span id="resCorrect" class="font-bold text-teal-600">০ টি</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">ভুল উত্তর:</span><span id="resWrong" class="font-bold text-rose-600">০ টি</span></div>
-        <div class="border-t border-slate-200 pt-2 flex justify-between"><span class="text-slate-700 font-semibold">শতকরা প্রাপ্তি:</span><span id="resPercent" class="font-bold text-sky-600">০%</span></div>
+  <!-- Modal: Confirm Reset -->
+  <div id="confirmModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+        !
       </div>
-      <button id="closeResultBtn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 rounded-lg text-sm">ফলাফল বন্ধ করো</button>
+      <h3 class="font-bold text-slate-900 text-lg">পরীক্ষা আবার শুরু করবে?</h3>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-5">তোমার আগের সকল দেওয়া উত্তর ক্লিয়ার হয়ে যাবে এবং নতুন করে আবার পরীক্ষা দিতে পারবে।</p>
+      <div class="flex gap-2.5">
+        <button type="button" onclick="closeConfirmModal()" class="flex-1 py-2.5 rounded-lg text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 cursor-pointer">বাতিল</button>
+        <button type="button" onclick="executeReset()" class="flex-1 py-2.5 rounded-lg text-sm font-bold bg-rose-600 hover:bg-rose-700 text-white shadow-md cursor-pointer">হ্যাঁ, শুরু করো</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: 24-Hour Limit Reached Notice -->
+  <div id="limitModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+        ⏳
+      </div>
+      <h3 class="font-bold text-slate-900 text-lg">দৈনিক লিমিট শেষ!</h3>
+      <p class="text-xs sm:text-sm text-slate-600 mt-2 mb-4">
+        তুমি ২৪ ঘণ্টায় সর্বোচ্চ ২ বার পরীক্ষা দেওয়ার সুযোগ ব্যবহার করে ফেলেছো। পরবর্তী পরীক্ষার সুযোগ পেতে অপেক্ষা করো:
+      </p>
+      <div class="bg-slate-100 border border-slate-300 rounded-xl py-3 px-4 mb-5">
+        <span class="text-xs text-slate-500 font-semibold uppercase block mb-0.5">বাকি সময়:</span>
+        <span id="countdownTimer" class="font-mono text-2xl font-black text-slate-800 tracking-wider">০০:০০:০০</span>
+      </div>
+      <button type="button" onclick="closeLimitModal()" class="w-full py-2.5 rounded-lg text-sm font-bold bg-slate-800 hover:bg-slate-900 text-white shadow-sm cursor-pointer">
+        বুঝেছি
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Questions Navigation Palette -->
+  <div id="navModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
+        <h3 class="font-bold text-slate-900 text-base">🧭 দ্রুত প্রশ্ন নেভিগেশন (১ - ৭৩)</h3>
+        <button type="button" onclick="toggleNavModal()" class="text-slate-400 hover:text-slate-700 text-lg font-bold cursor-pointer">✕</button>
+      </div>
+      <div class="overflow-y-auto custom-scrollbar pr-1 flex-1">
+        <div id="paletteGrid" class="grid grid-cols-6 sm:grid-cols-8 gap-2"></div>
+      </div>
+      <div class="pt-3 border-t border-slate-200 mt-3 text-right">
+        <button type="button" onclick="toggleNavModal()" class="px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold border border-slate-300 cursor-pointer">
+          বন্ধ করুন
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Admin Authentication -->
+  <div id="adminModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center">
+      <div class="w-12 h-12 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+        🔑
+      </div>
+      <h3 class="font-bold text-slate-900 text-lg">অ্যাডমিন প্রবেশাধিকার</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4">গুগল শিট লিংক কনফিগারেশন ও আনলিমিটেড পরীক্ষার জন্য পাসওয়ার্ড দিন।</p>
+      
+      <div class="space-y-3">
+        <input type="password" id="adminPinInput" autocomplete="off" placeholder="গোপন পাসওয়ার্ড দিন" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-sm text-center text-slate-800 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" onkeydown="if(event.key==='Enter') submitAdminPin()">
+        <p id="adminErrorMsg" class="text-rose-600 text-xs font-semibold hidden">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
+        <div class="flex gap-2">
+          <button type="button" onclick="closeAdminModal()" class="flex-1 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 cursor-pointer">বাতিল</button>
+          <button type="button" onclick="submitAdminPin()" class="flex-1 py-2 rounded-lg text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-sm cursor-pointer">প্রবেশ করুন</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Main Panel (Shows directly after unlocking) -->
+  <div id="adminMenuModal" class="fixed inset-0 bg-slate-900/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-xs">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">👑</span>
+          <h3 class="font-bold text-slate-900 text-lg">অ্যাডমিন কন্ট্রোল প্যানেল (Tasin)</h3>
+        </div>
+        <button type="button" onclick="closeAdminMenuModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">✕</button>
+      </div>
+      
+      <div class="overflow-y-auto custom-scrollbar pr-1 space-y-4 flex-1">
+        <!-- 🎯 PROMINENT GOOGLE SHEET CONFIGURATION SECTION -->
+        <div class="bg-sky-50/90 border-2 border-sky-400 rounded-xl p-4 shadow-sm">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xl">📊</span>
+            <h4 class="font-bold text-sky-900 text-base">গুগল শিট লিংক কনফিগারেশন</h4>
+          </div>
+          <p class="text-xs text-sky-700 mb-3">
+            তোমার Google Apps Script থেকে কপি করা <strong>Web app URL</strong> লিংকটি নিচের বক্সে পেস্ট করে সেভ করো:
+          </p>
+
+          <div class="space-y-2">
+            <label for="scriptUrlInput" class="block text-xs font-bold text-slate-700">Web app URL:</label>
+            <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            
+            <div class="flex items-center justify-between pt-1">
+              <button type="button" onclick="saveScriptUrl()" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-bold text-xs shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                <span>💾 লিংক সেভ করুন</span>
+              </button>
+              <span id="saveUrlStatus" class="text-emerald-600 font-bold text-xs hidden">✓ সফলভাবে লিংক সংরক্ষিত হয়েছে!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Test / Sheet Connection Status -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-600 flex items-center justify-between">
+          <span>বর্তমান সক্রিয় শিট স্ট্যাটাস:</span>
+          <span id="currentSheetStatusBadge" class="font-bold text-rose-600">⚠️ লিংক সংযুক্ত নেই</span>
+        </div>
+
+        <!-- Admin Extra Options -->
+        <div class="space-y-2 pt-2 border-t border-slate-200">
+          <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">অতিরিক্ত নিয়ন্ত্রণ:</h4>
+          <button type="button" onclick="adminResetDeviceAttempts()" class="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>🔄 এই ডিভাইসের সকল লিমিট ও হিস্ট্রি ক্লিয়ার করো</span>
+          </button>
+          <button type="button" onclick="adminLogout()" class="w-full py-2.5 rounded-lg text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>🚪 অ্যাডমিন মোড থেকে লগআউট</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-200 mt-3 text-right">
+        <button type="button" onclick="closeAdminMenuModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold shadow-sm cursor-pointer">
+          হয়ে গেছে (বন্ধ করুন)
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
-    // YOUR HARDCODED WEB APP URL (Permanent Fallback)
-    const PERMANENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbxioPAFfiIxOqDiNKBiolri2tHiChsflsrGLzXaJG_TKk3cbcUKvKsvc-x6eZXEJ7moxA/exec";
-
-    // 73 QUESTIONS DATA
-    const questions = [
-      { id: 1, q: "লিক টেস্ট করার জন্য কোন পদ্ধতি জনপ্রিয়?", options: ["সাবান ফেনা", "পানি", "লিটমাস পেপার", "হাইড্রোমিটার"], correct: 0 },
-      { id: 2, q: "কম্প্রেসরের কাজ কি?", options: ["রেফ্রিজারেন্টের চাপ ও তাপমাত্রা বৃদ্ধি করা", "রেফ্রিজারেন্ট ফিল্টার করা", "তাপমাত্রা কমানো", "বিদ্যুৎ তৈরি করা"], correct: 0 },
-      { id: 3, q: "কনডেনসারের প্রধান কাজ কী?", options: ["বাষ্পকে তরলে রূপান্তর করা", "চাপ কমানো", "তরল বাষ্প করা", "তেল আলাদা করা"], correct: 0 },
-      { id: 4, q: "ইভাপোরেটরে কী ঘটে?", options: ["রেফ্রিজারেন্ট তরল থেকে বাষ্প হয়", "বাষ্প তরল হয়", "চাপ বৃদ্ধি পায়", "বরফ গলে"], correct: 0 },
-      { id: 5, q: "ক্যাপিলারি টিউবের কাজ কী?", options: ["উচ্চ চাপকে নিম্ন চাপে রূপান্তর করা", "তাপমাত্রা বৃদ্ধি করা", "রেফ্রিজারেন্ট জমা রাখা", "গ্যাস ফিল্টার করা"], correct: 0 },
-      { id: 6, q: "রেফ্রিজারেশন সাইকেলে কয়টি প্রধান অংশ থাকে?", options: ["৪টি", "৩টি", "৫টি", "২টি"], correct: 0 },
-      { id: 7, q: "R-134a কোন রঙের সিলিন্ডারে থাকে?", options: ["হালকা নীল", "সবুজ", "গোলাপি", "ধূসর"], correct: 0 },
-      { id: 8, q: "R-600a রেফ্রিজারেন্ট কোন ধরনের?", options: ["আইসোবিউটেন (জ্বলনশীল)", "সিএফসি", "নন-ফ্লেমেবল", "বিষাক্ত"], correct: 0 },
-      { id: 9, q: "ভ্যাকুয়াম পাম্প কেন ব্যবহার করা হয়?", options: ["বাতাস ও আর্দ্রতা বের করার জন্য", "গ্যাস চার্জ করার জন্য", "তেল পরিবর্তনের জন্য", "তাপমাত্রা কমাতে"], correct: 0 },
-      { id: 10, q: "সিস্টেমে ময়লা ও আর্দ্রতা আটকাতে কি ব্যবহৃত হয়?", options: ["ড্রায়ার ফিল্টার", "কনডেনসার", "ইভাপোরেটর", "থার্মোস্ট্যাট"], correct: 0 },
-      { id: 11, q: "থার্মোস্ট্যাটের কাজ কী?", options: ["তাপমাত্রা নিয়ন্ত্রণ করা", "চাপ নিয়ন্ত্রণ করা", "বিদ্যুৎ সঞ্চয়", "গ্যাস পরিমাপ"], correct: 0 },
-      { id: 12, q: "ওএলপি (OLP) এর পূর্ণরূপ কি?", options: ["Overload Protector", "Open Line Phase", "Output Low Power", "Over Level Pipe"], correct: 0 },
-      { id: 13, q: "রিলে কম্প্রেসরে কি কাজ করে?", options: ["স্টার্টিং ওয়াইন্ডিং চালু করতে সাহায্য করে", "গতি বাড়ায়", "তাপমাত্রা কমায়", "বিদ্যুৎ সাশ্রয় করে"], correct: 0 },
-      { id: 14, q: "ফ্লেয়ারিং কেন করা হয়?", options: ["তামার পাইপের মুখ চওড়া করার জন্য", "পাইপ কাটার জন্য", "পাইপ বাঁকানোর জন্য", "ঝালাই করার জন্য"], correct: 0 },
-      { id: 15, q: "সোয়েজিং এর উদ্দেশ্য কী?", options: ["একই আকারের দুটি পাইপ জোড়া লাগানো", "পাইপ বন্ধ করা", "ছিদ্র করা", "রং করা"], correct: 0 },
-      { id: 16, q: "ব্রাজিং করার সময় কোন গ্যাস ব্যবহার হয়?", options: ["অক্সিজেন ও এলপিজি/অ্যাসিটিলিন", "শুধু নাইট্রোজেন", "কার্বন ডাই অক্সাইড", "হিলিয়াম"], correct: 0 },
-      { id: 17, q: "গেজ ম্যানিফোল্ডে কয়টি মিটার থাকে?", options: ["২টি", "৩টি", "১টি", "৪টি"], correct: 0 },
-      { id: 18, q: "কম্পাউন্ড গেজ কোন রঙে চিহ্নিত থাকে?", options: ["নীল", "লাল", "হলুদ", "সবুজ"], correct: 0 },
-      { id: 19, q: "হাই প্রেশার গেজ কোন রঙের হয়?", options: ["লাল", "নীল", "হলুদ", "কালো"], correct: 0 },
-      { id: 20, q: "রেফ্রিজারেশন সিস্টেমে ফ্লাশিং কেন করা হয়?", options: ["পাইপের ভেতরের ময়লা ও পোড়া তেল পরিষ্কার করতে", "ঠান্ডা বাড়াতে", "গ্যাস কমাতে", "লিক খুঁজতে"], correct: 0 },
-      { id: 21, q: "ফ্লাশিং এর জন্য সবচেয়ে নিরাপদ গ্যাস কোনটি?", options: ["শুকনো নাইট্রোজেন", "অক্সিজেন", "এলপিজি", "হাইড্রোজেন"], correct: 0 },
-      { id: 22, q: "কখনোই ফ্লাশিং এ কোনটি ব্যবহার করা যাবে না?", options: ["অক্সিজেন (বিস্ফোরণ ঘটতে পারে)", "নাইট্রোজেন", "R-141b", "বাতাস"], correct: 0 },
-      { id: 23, q: "রেফ্রিজারেটরের ফ্রস্ট কেন হয়?", options: ["বাতাসের জলীয় বাষ্প জমে বরফ হলে", "অতিরিক্ত গ্যাস দিলে", "কম্প্রেসর দ্রুত ঘুরলে", "ড্রায়ার জ্যাম হলে"], correct: 0 },
-      { id: 24, q: "নো-ফ্রস্ট রেফ্রিজারেটরে বরফ গলাতে কি থাকে?", options: ["ডিফ্রস্ট হিটার ও টাইমার", "ফ্যান", "ক্যাপিলারি", "থার্মোস্ট্যাট"], correct: 0 },
-      { id: 25, q: "থার্মাল ফিউজের কাজ কী?", options: ["হিটার অতিরিক্ত গরম হলে সংযোগ বিচ্ছিন্ন করা", "মোটর চালু রাখা", "বরফ জমানো", "লাইট জ্বালানো"], correct: 0 },
-      { id: 26, q: "ডিফ্রস্ট টাইমার কত সময় পর পর চালু হয়?", options: ["সাধারণত ৬ থেকে ৮ ঘণ্টা পর", "প্রতি মিনিটে", "২৪ ঘণ্টা পর", "১ ঘণ্টা পর"], correct: 0 },
-      { id: 27, q: "বায়োমেটাল থার্মোস্ট্যাট কখন কাজ করে?", options: ["নির্দিষ্ট মাইনাস তাপমাত্রায় সংযোগ দেয়", "গরম হলে সংযোগ কাটে", "বিদ্যুৎ চলে গেলে", "সবসময় বন্ধ থাকে"], correct: 0 },
-      { id: 28, q: "কম্প্রেসর তেলের কাজ কী?", options: ["মুভিং পার্টস পিচ্ছিল ও ঠান্ডা রাখা", "গ্যাস তৈরি করা", "বিদ্যুৎ সঞ্চালন", "বরফ জমানো"], correct: 0 },
-      { id: 29, q: "R-134a গ্যাসের সাথে কোন তেল ব্যবহার করা হয়?", options: ["POE (পলিওল এস্টার) অয়েল", "মিনারেল অয়েল", "সরিষার তেল", "মোবিল"], correct: 0 },
-      { id: 30, q: "R-22 গ্যাসের সাথে কোন তেল ব্যবহার হয়?", options: ["মিনারেল অয়েল", "POE অয়েল", "ভেজিটেবল অয়েল", "সিন্থেটিক অয়েল"], correct: 0 },
-      { id: 31, q: "ভ্যাকুয়াম কতক্ষণ করা উচিত?", options: ["অন্তত ১৫-৩০ মিনিট (৫০০ মাইক্রন)", "১ মিনিট", "৫ সেকেন্ড", "২ ঘণ্টা বাধ্যতামূলক"], correct: 0 },
-      { id: 32, q: "গ্যাস চার্জ করার সঠিক পদ্ধতি কোনটি?", options: ["ওজন মেপে (Weighing Scale)", "শুধু হাত দিয়ে ছুঁয়ে", "চোখে দেখে", "শব্দ শুনে"], correct: 0 },
-      { id: 33, q: "লিক চেক করার উপযুক্ত সময় কোনটি?", options: ["সিস্টেমে প্রেশার দেওয়ার পর", "ভ্যাকুয়াম করার পর", "সব বরফ জমার পর", "বিদ্যুৎ বন্ধ থাকলে"], correct: 0 },
-      { id: 34, q: "উইন্ডো এয়ার কন্ডিশনারে কয়টি মোটর থাকে?", options: ["একটি (ডাবল শ্যাফট)", "দুটি", "তিনটি", "কোনোটিই না"], correct: 0 },
-      { id: 35, q: "স্প্লিট এসির কয়টি ইউনিট থাকে?", options: ["২টি (ইনডোর ও আউটডোর)", "১টি", "৩টি", "৪টি"], correct: 0 },
-      { id: 36, q: "এসি ইনডোর ইউনিটে কি থাকে?", options: ["কুলিং কয়েল ও ব্লোয়ার ফ্যান", "কম্প্রেসর ও কনডেনসার", "ড্রায়ার", "শুধু তার"], correct: 0 },
-      { id: 37, q: "এসি আউটডোর ইউনিটে কি থাকে?", options: ["কম্প্রেসর ও কনডেনসার কয়েল", "ইভাপোরেটর", "রিমোট সেন্সর", "এয়ার ফিল্টার"], correct: 0 },
-      { id: 38, q: "ইনভার্টার এসির সুবিধা কি?", options: ["বিদ্যুৎ সাশ্রয় হয় ও শব্দ কম", "দাম খুব কম", "বিদ্যুৎ বেশি লাগে", "রিলে লাগে"], correct: 0 },
-      { id: 39, q: "নন-ইনভার্টার কম্প্রেসর কিভাবে চলে?", options: ["অন এবং অফ মোডে", "সবসময় একই গতিতে", "বিভিন্ন ভোল্টেজে", "পানি দিয়ে"], correct: 0 },
-      { id: 40, q: "রেফ্রিজারেশনের এক টন (১ TR) সমান কত BTU/hr?", options: ["১২,০০০ BTU/hr", "১০,০০০ BTU/hr", "১৪,০০০ BTU/hr", "৮,০০০ BTU/hr"], correct: 0 },
-      { id: 41, q: "১ টন সমান কত ওয়াট (প্রায়)?", options: ["৩৫১৬ ওয়াট", "১০০০ ওয়াট", "৭৪৬ ওয়াট", "৫০০০ ওয়াট"], correct: 0 },
-      { id: 42, q: "এয়ার কন্ডিশনারের ফিল্টার কতদিন পর পরিষ্কার করা উচিত?", options: ["১৫-৩০ দিন পর পর", "১ বছর পর", "কখনো না", "প্রতিদিন"], correct: 0 },
-      { id: 43, q: "কম্প্রেসরে কয়টি টার্মিনাল থাকে?", options: ["৩টি (C, S, R)", "২টি", "৪টি", "১টি"], correct: 0 },
-      { id: 44, q: "C, S, R এর পূর্ণ অর্থ কী?", options: ["Common, Start, Run", "Cool, Slow, Rapid", "Current, Switch, Relay", "Center, Side, Rear"], correct: 0 },
-      { id: 45, q: "কোন দুটি টার্মিনালের মধ্যে রেজিস্ট্যান্স সবচেয়ে বেশি?", options: ["Start এবং Run", "Common এবং Start", "Common এবং Run", "সব সমান"], correct: 0 },
-      { id: 46, q: "কোন দুটি টার্মিনালের রেজিস্ট্যান্স সবচেয়ে কম?", options: ["Common এবং Run", "Start এবং Run", "Common এবং Start", "বডি এবং টার্মিনাল"], correct: 0 },
-      { id: 47, q: "কম্প্রেসর পাম্পিং ফেইল হলে কি হবে?", options: ["গ্যাস ঠিক থাকলেও ঠান্ডা হবে না", "বরফ বেশি জমবে", "বিদ্যুৎ বন্ধ হবে", "আওয়াজ হবে না"], correct: 0 },
-      { id: 48, q: "ক্যাপিলারি টিউব ব্লক হলে ব্যাক প্রেশার কেমন দেখাবে?", options: ["শূন্য বা ভ্যাকুয়ামে চলে যাবে", "অনেক বেশি হবে", "স্বাভাবিক থাকবে", "১০০ পিএসআই হবে"], correct: 0 },
-      { id: 49, q: "ডিসচার্জ লাইন কেমন অনুভূত হবে যখন সিস্টেম স্বাভাবিক চলে?", options: ["গরম", "খুব ঠান্ডা", "বরফ জমে থাকবে", "স্বাভাবিক নরমাল"], correct: 0 },
-      { id: 50, q: "সাকশন লাইনে হাত দিলে কেমন লাগবে?", options: ["ঠান্ডা ও ঘামবে", "খুব গরম", "শুষ্ক", "ধোঁয়া উঠবে"], correct: 0 },
-      { id: 51, q: "গ্যাস অতিরিক্ত (Overcharge) হলে কি লক্ষণ দেখা যায়?", options: ["সাকশন লাইনে বরফ আসবে ও অ্যাম্পিয়ার বাড়বে", "ঠান্ডা খুব ভালো হবে", "বিদ্যুৎ খরচ কমবে", "প্রেসার কমে যাবে"], correct: 0 },
-      { id: 52, q: "গ্যাস কম (Undercharge) থাকলে কি হবে?", options: ["ইভাপোরেটরে আংশিক বরফ হবে এবং ঠান্ডা কমবে", "কম্প্রেসর ঠান্ডা থাকবে", "অ্যাম্পিয়ার বাড়বে", "পানি বেশি জমবে"], correct: 0 },
-      { id: 53, q: "স্বাভাবিক অবস্থায় R-134a এর রানিং প্রেশার কত?", options: ["১২ থেকে ১৫ PSI", "৭০ থেকে ৮০ PSI", "১২০ থেকে ১৫০ PSI", "০ থেকে ২ PSI"], correct: 0 },
-      { id: 54, q: "R-22 এর স্বাভাবিক রানিং সাকশন প্রেশার কত?", options: ["৬০ থেকে ৭০ PSI", "১২ থেকে ১৫ PSI", "১১০ থেকে ১২৫ PSI", "২০ থেকে ২৫ PSI"], correct: 0 },
-      { id: 55, q: "R-410A এসির রানিং প্রেশার কত?", options: ["১১০ থেকে ১২৫ PSI", "৬০ থেকে ৭০ PSI", "১৫ থেকে ২০ PSI", "২০০ থেকে ২৫০ PSI"], correct: 0 },
-      { id: 56, q: "R-600a রেফ্রিজারেটরের রানিং সাকশন প্রেশার কত থাকে?", options: ["-১ থেকে ১ PSI (শূন্যের কাছাকাছি)", "২০ থেকে ২৫ PSI", "৫০ PSI", "৮০ PSI"], correct: 0 },
-      { id: 57, q: "অ্যাসিড টেস্ট কিটের কাজ কী?", options: ["কম্প্রেসর পোড়া তেলের অম্লতা পরিমাপ করা", "গ্যাস মাপা", "লিক পরীক্ষা", "ভোল্টেজ চেক"], correct: 0 },
-      { id: 58, q: "রেফ্রিজারেশন সিস্টেমে ময়েশ্চার ঢুকলে কি ক্ষতি হয়?", options: ["ক্যাপিলারি টিউবের মুখে বরফ জমে চোক হয়", "ঠান্ডা বাড়ে", "গ্যাস বেড়ে যায়", "কম্প্রেসর দ্রুত ঘোরে"], correct: 0 },
-      { id: 59, q: "পাইপ কাটার জন্য কোন টুলস ব্যবহার করা নিরাপদ?", options: ["টিউব কাটার", "হ্যাকস করাত", "কাঁচি", "ছুরি"], correct: 0 },
-      { id: 60, q: "পাইপ বেন্ড করার সঠিক টুলের নাম কি?", options: ["টিউব বেন্ডার", "হাতুড়ি", "প্লায়ার্স", "র্যাচেট"], correct: 0 },
-      { id: 61, q: "ব্রাজিং করার আগে পাইপের মুখে কি ব্যবহার করা হয়?", options: ["ফ্লাক্স (Flux)", "তেল", "পানি", "সিমেন্ট"], correct: 0 },
-      { id: 62, q: "কপার টু কপার ঝালাইয়ে কোন রড বেশি ব্যবহৃত হয়?", options: ["ফসফরাস কপার রড", "লোহার রড", "তামার তার", "অ্যালুমিনিয়াম রড"], correct: 0 },
-      { id: 63, q: "কপার টু লোহা ঝালাই করতে কি রড লাগে?", options: ["সিলভার রড এবং ফ্লাক্স", "কপার রড", "লেড রড", "টিন"], correct: 0 },
-      { id: 64, q: "কোন রেফ্রিজারেন্ট পরিবেশের ওজোন স্তরের কোনো ক্ষতি করে না?", options: ["R-134a / R-600a", "R-11", "R-12", "R-22"], correct: 0 },
-      { id: 65, q: "ODP এর পূর্ণ অর্থ কি?", options: ["Ozone Depletion Potential", "Oil Discharge Pressure", "Output Direct Phase", "Open Drain Pipe"], correct: 0 },
-      { id: 66, q: "GWP এর পূর্ণ অর্থ কি?", options: ["Global Warming Potential", "Gas Weight Pressure", "General Work Pipe", "Good Working Phase"], correct: 0 },
-      { id: 67, q: "ক্ল্যাম্প মিটার দিয়ে মূলত কি মাপা হয়?", options: ["বিদ্যুতের কারেন্ট (অ্যাম্পিয়ার)", "গ্যাসের পরিমাণ", "তামার পুরুত্ব", "বাতাসের বেগ"], correct: 0 },
-      { id: 68, q: "মেগার (Megger) মিটার কি কাজে লাগে?", options: ["মোটরের ইনসুলেশন রেজিস্ট্যান্স মাপতে", "ভোল্টেজ মাপতে", "ওজন মাপতে", "চাপ দেখতে"], correct: 0 },
-      { id: 69, q: "কম্প্রেসর বডি শর্ট চেক করার সঠিক উপায় কোনটি?", options: ["টার্মিনাল পিন এবং বডির আর্থিং পয়েন্টের ওহম মাপা", "হাত দিয়ে স্পর্শ করা", "ব্যাটারি লাগানো", "পানি দেওয়া"], correct: 0 },
-      { id: 70, q: "পোর্টেবল এয়ার কন্ডিশনারের পাইপ দিয়ে কি বের হয়?", options: ["গরম বাতাস", "ঠান্ডা গ্যাস", "তেল", "বরফ"], correct: 0 },
-      { id: 71, q: "কুলিং কয়েলে ফিন্স কেন ব্যবহার করা হয়?", options: ["তাপ স্থানান্তরের ক্ষেত্রফল বাড়াতে", "ডিজাইন সুন্দর করতে", "পাইপ ঢেকে রাখতে", "শব্দ কমাতে"], correct: 0 },
-      { id: 72, q: "ডিপ ফ্রিজের অভ্যন্তরীণ তাপমাত্রা কত হওয়া উচিত?", options: ["-১৮°C বা তার নিচে", "+৪°C", "+১০°C", "০°C"], correct: 0 },
-      { id: 73, q: "নরমাল রেফ্রিজারেটরের চেম্বারের আদর্শ তাপমাত্রা কত?", options: ["+২°C থেকে +৫°C", "-১৮°C", "-৫°C", "+১৫°C"], correct: 0 }
+    // 73 Pure MCQs accurately extracted from the official ATTC Level-1 Suggestion Sheet
+    const questionsData = [
+      { id: 1, question: "লিক টেস্ট করার জন্য কোন পদ্ধতি জনপ্রিয়?", options: ["সাবান ফেনা", "পানি", "লিটমাস পেপার", "হাইড্রোমিটার"], correct: 0 },
+      { id: 2, question: "যদি কোন রেফ্রিজারেটর চালু না হয় তাহলে সর্ব-প্রথমে কোনটি চেক করবে?", options: ["থার্মোস্ট্যাট", "কম্প্রেশর", "ক্যাপাসিটর", "পাওয়ার সাপ্লাই"], correct: 3 },
+      { id: 3, question: "R-600a সিলিন্ডারের রং কি?", options: ["সবুজ (green)", "লাল (red)", "খয়েরি (brown)", "কালো (black)"], correct: 2 },
+      { id: 4, question: "কোনটি কম্প্রেশরের কাজ নয়?", options: ["কুলিং", "সাকশন", "ডিসচার্জ", "কম্প্রেশন"], correct: 0 },
+      { id: 5, question: "কম্প্রেশরের দুর্বল অংশ কোনটি?", options: ["টার্মিনাল", "সারফেস জয়েন্ট", "স্প্রিং", "থার্মোস্ট্যাট"], correct: 0 },
+      { id: 6, question: "ব্রেজিংয়ের ক্ষেত্রে উপযুক্ত শিখার দূরত্ব কত?", options: ["৫-১০ মি.মি.", "১০-১৫ মি.মি.", "১৫-২০ মি.মি.", "২০-২৫ মি.মি."], correct: 1 },
+      { id: 7, question: "রেফ্রিজারেটরের রানিং সাকশন প্রেশার কত?", options: ["0 PSI এর কম", "0 PSI এর বেশি", "0 atm এর কম", "0 atm এর বেশি"], correct: 0 },
+      { id: 8, question: "রেফ্রিজারেশন এবং এয়ারকন্ডিশনিং কাজে ফ্লেয়ার্ড ফিটিংস সংযোজন এর জন্য কত ডিগ্রি ফ্লেয়ারিং করতে হয়?", options: ["৩৭ ডিগ্রি", "১২০ ডিগ্রি", "৪৫ ডিগ্রি", "৯০ ডিগ্রি"], correct: 2 },
+      { id: 9, question: "বৈদ্যুতিক পাওয়ারের একক কোনটি?", options: ["হার্টজ", "অ্যাম্পিয়ার", "ওয়াট", "কিলোগ্রাম"], correct: 2 },
+      { id: 10, question: "নিচের কোনটি তাপমাত্রার উপর নির্ভর করে সার্কিটকে অন অফ করতে পারে?", options: ["কম্প্রেশর", "কন্ডেনসার", "থার্মোস্ট্যাট", "টাইমার"], correct: 2 },
+      { id: 11, question: "নিচের কোন সম্পর্কটি সঠিক?", options: ["V = IR", "I = R/V", "R = I/V", "R = VI"], correct: 0 },
+      { id: 12, question: "একটি রেফ্রিজারেটরে রেফ্রিজারেন্ট চার্জ করতে নিচের কোন পিপিই টি প্রয়োজন?", options: ["সেফটি মাস্ক", "সবগুলো", "সেফটি হ্যান্ড গ্লোভস", "সেফটি গগলস"], correct: 1 },
+      { id: 13, question: "নিচের কোনটি ইভাপোরেটরের কাজ?", options: ["তাপ শোষণ", "তাপ বর্জন", "তাপ বৃদ্ধি", "চাপ বৃদ্ধি করা"], correct: 0 },
+      { id: 14, question: "মেটাল শীট এর উপর দাগ দিতে কোন টুলস ব্যবহার করা হয়?", options: ["স্ক্রাপার", "স্ক্রাইবার", "পেন্সিল", "চিজেল"], correct: 1 },
+      { id: 15, question: "ব্রেজিং করার সময় টিউবের ভিতর দিয়ে কোন গ্যাসের প্রবাহ রাখা উচিত?", options: ["নাইট্রোজেন", "অক্সিজেন", "অ্যাসিটিলিন", "মিথেন"], correct: 0 },
+      { id: 16, question: "কম্প্রেসর প্রধানত কত প্রকার?", options: ["২ প্রকার", "৩ প্রকার", "৪ প্রকার", "৫ প্রকার"], correct: 3 },
+      { id: 17, question: "নিচের কোনটি কম্প্রেশরের কাজ নয়?", options: ["সাকশন", "ডিসচার্জ", "ঠান্ডা করা", "কম্প্রেশন"], correct: 2 },
+      { id: 18, question: "আবাসিক রেফ্রিজারেটরের কম্প্রেশর মোটরে কয়টি কয়েল থাকে?", options: ["২ টি", "৩ টি", "৪ টি", "৬ টি"], correct: 0 },
+      { id: 19, question: "নিচের কোনটি ক্যাপিলারি টিউবের কাজ নয়?", options: ["থ্রটলিং", "মিটানিং", "এক্সপানশন", "কোনটিই নয়"], correct: 3 },
+      { id: 20, question: "কোনটি কাটিং টুলস নয়?", options: ["টিউব কাটার", "চিজেল", "হ্যাক স", "ফিলার গেজ"], correct: 3 },
+      { id: 21, question: "R-134a রেফ্রিজারেন্ট সিলিন্ডারের রং কোনটি?", options: ["সাদা", "বাদামী", "আকাশী", "সবুজ"], correct: 2 },
+      { id: 22, question: "একটি লোহার দণ্ডের এক প্রান্ত গরম করলে, কিছুক্ষণ পর অন্য প্রান্তটিও গরম হয়ে যায়, এটি কোন ধরণের তাপ প্রবাহের উদাহরণ?", options: ["পরিবহন", "পরিচলন", "বিকিরণ", "কোনটিই নয়"], correct: 1 },
+      { id: 23, question: "নিচের কোনটি তাপমাত্রার উপর নির্ভর করে সার্কিটকে অন অফ করতে পারে?", options: ["কম্প্রেশর", "কন্ডেনসার", "থার্মোস্ট্যাট", "টাইমার"], correct: 2 },
+      { id: 24, question: "নিউট্রাল শিখায় গ্যাসের অনুপাত-", options: ["১:১", "১:২", "২:১", "২:৩"], correct: 0 },
+      { id: 25, question: "অল্টারনেটিং কারেন্ট ব্যবস্থায় একটা ফেজ তার (wire) ও একটা নিউট্রাল তার (wire) থাকলে তাকে বলে-", options: ["সিঙ্গেল ফেজ", "ডাবল ফেজ", "থ্রি ফেজ", "মাল্টি ফেজ"], correct: 0 },
+      { id: 26, question: "নিচের কোনটি কন্ডেন্সারের হিমায়ন ক্ষমতাকে প্রভাবিত করে না?", options: ["ম্যাটেরিয়াল", "তাপমাত্রার পার্থক্য", "রেফ্রিজারেন্ট এর ধরণ", "কোনোটিই নয়"], correct: 2 },
+      { id: 27, question: "ইন্সুলেটর ও কন্ডাক্টরের রেজিস্ট্যান্স পরীক্ষা/পরিমাপ করার জন্য ব্যবহার করা হয়-", options: ["ওহম মিটার", "ওয়াট মিটার", "মেগার", "AVO মিটার"], correct: 2 },
+      { id: 28, question: "একটি সার্কিট রক্ষণকারী যন্ত্র হিসেবে নিচের কোনটি ব্যবহার হয়?", options: ["তার বা ক্যাবল", "পিয়ানো সুইচ", "সার্কিট ব্রেকার", "কোনটিই নয়"], correct: 2 },
+      { id: 29, question: "কম্প্রেশর মোটর পুড়ে যাওয়ার কারণ কোনটি?", options: ["ভুল ইলেকট্রিক সংযোগ", "হিমায়ক বেশি", "লো পাম্পিং", "ক্ষয়প্রাপ্ত সিলিন্ডার"], correct: 0 },
+      { id: 30, question: "ব্রেজিং এর তাপমাত্রা কত হয়?", options: ["৪৫০ এর বেশি", "৪৫০ এর কম", "২০০ থেকে ৩০০ ডিগ্রি", "২০০ ডিগ্রি এর কম"], correct: 0 },
+      { id: 31, question: "এক ফেজ কম্প্রেশরে কয়টি ইলেকট্রিক টার্মিনাল থাকে?", options: ["২ টি", "৩ টি", "৪ টি", "নির্দিষ্ট নয়"], correct: 1 },
+      { id: 32, question: "OLP এর পুরো নাম কি?", options: ["ওভার লোড পুলার", "ওভার লোড প্রেসার", "ওভার লোড পাওয়ার", "ওভার লোড প্রোটেক্টর"], correct: 3 },
+      { id: 33, question: "একটি রেফ্রিজারেটরের ফ্রেশ ফুড চেম্বারের তাপমাত্রা কত থাকা উচিত?", options: ["০° সে থেকে ১০° সে", "১২° সে থেকে ১৫° সে", "৬° সে থেকে ৮°সে", "২° সে থেকে ৪.৫° সে"], correct: 3 },
+      { id: 34, question: "গ্যাস ওয়েল্ডিং এর সময় অ্যাসিটিলিন এর চাপ কত থাকে?", options: ["১০-১৫ পিএসআই", "২০-২৫ পিএসআই", "৩০-৩৫ পিএসআই", "৪০-৪৫ পিএসআই"], correct: 0 },
+      { id: 35, question: "নিচের কোন রেফ্রিজারেন্টটি দাহ্য বা Flammable?", options: ["R-134a", "R-22", "R-600a", "R-407c"], correct: 2 },
+      { id: 36, question: "রেফ্রিজারেটর বা এয়ারকন্ডিশনারে রেফ্রিজারেন্ট চার্জ করার সময় যাতে রেফ্রিজারেন্ট শ্বাস-প্রশ্বাসের সাথে ফুসফুসে গিয়ে ক্ষতি করতে না পারে, সেজন্য কোন পিপিইটি অবশ্যই ব্যবহার করা উচিৎ?", options: ["সেফটি মাস্ক", "সেফটি হ্যান্ড গ্লোভস", "সেফটি গগলস", "সবগুলো"], correct: 0 },
+      { id: 37, question: "ইভাপোরেটর, কন্ডেন্সার ইত্যাদিতে ব্যবহার করা হয়-", options: ["স্টিল পাইপ", "প্লাস্টিক পাইপ", "স্টেইনলেস স্টিল পাইপ", "অ্যালুমিনিয়াম টিউব"], correct: 3 },
+      { id: 38, question: "ইঞ্চি ও মিলিমিটারের মধ্যে সম্পর্ক কোনটি?", options: ["১ ইঞ্চি = ২.৫৪ মি.মি", "১ ইঞ্চি = ২৫.৪ মি.মি", "১ ইঞ্চি = ১০ মি.মি", "১ ইঞ্চি = ১০০ মি.মি"], correct: 1 },
+      { id: 39, question: "রেফ্রিজারেশন ইউনিটের লিক নির্ণয়ের জন্য কোন টুলস ব্যবহার করতে হয়?", options: ["অ্যানিমোমিটার", "গেজ মেনিফোল্ড", "থার্মোমিটার", "ইলেকট্রনিক লিক ডিটেক্টর"], correct: 3 },
+      { id: 40, question: "নিচের কোন সম্পর্কটি সঠিক নয়?", options: ["V = IR", "I = R/V", "R = V/I", "I = V/R"], correct: 1 },
+      { id: 41, question: "সাধারণত কয়টি উপায়ে তাপ প্রবাহিত হয়?", options: ["২ টি উপায়ে", "৩ টি উপায়ে", "৪ টি উপায়ে", "৫ টি উপায়ে"], correct: 1 },
+      { id: 42, question: "সঠিকভাবে রেফ্রিজারেন্ট চার্জ করার জন্য কোন টুলসটি ব্যবহার করতে হয়?", options: ["ডাবল গেজ মেনিফোল্ড", "হাই প্রেশার গেজ", "কম্প্রেশর মোটর", "রিকভারি মেশিন"], correct: 0 },
+      { id: 43, question: "নিচের কোনটি রেফ্রিজারেটরের রেফ্রিজারেন্ট বা গ্যাসের চাপ পরিমাপ করতে ব্যবহৃত হয়?", options: ["পটেনশিয়াল রিলে", "ওভারলোড প্রটেক্টর", "ভোল্টমিটার", "প্রেশার গেজ"], correct: 3 },
+      { id: 44, question: "১ বার সমান কত পিএসআই?", options: ["১৪ পিএসআই", "২৯ পিএসআই", "১৪.৫ পিএসআই", "৭৬০ পিএসআই"], correct: 2 },
+      { id: 45, question: "রেফ্রিজারেশন কাজে কপার টিউবের কোন ধরণের সাইজ ব্যবহারযোগ্য?", options: ["Inside Dia", "Outside Dia", "Radius", "Half Radius"], correct: 1 },
+      { id: 46, question: "ভেজা ফিল্টার ব্যবহার করা হয়-", options: ["সেন্ট্রাল এসি প্লান্ট", "স্প্লিট টাইপ এসিতে", "উইন্ডো টাইপ এসিতে", "গাড়ির এসিতে"], correct: 0 },
+      { id: 47, question: "আবাসিক রেফ্রিজারেটরে কোন ধরণের কম্প্রেশর ব্যবহৃত হয়?", options: ["সেন্ট্রিফিউগ্যাল কম্প্রেশর", "স্ক্রল কম্প্রেশর", "রেসিপ্রোকেটিং কম্প্রেশর", "রোটারি কম্প্রেশর"], correct: 2 },
+      { id: 48, question: "কর্মক্ষেত্রে চোখের নিরাপত্তার জন্য নিচের কোন পিপিইটি জরুরী?", options: ["সেফটি মাস্ক", "সেফটি হ্যান্ড গ্লোভস", "সেফটি গগলস", "সবগুলো"], correct: 2 },
+      { id: 49, question: "অক্সি-অ্যাসিটিলিন গ্যাস ওয়েল্ডিং সেট ব্যবহার করার সময়, আগুন বা শিখা যাতে কোনো ভাবেই সিলিন্ডার এর ভিতরের দিকে যেতে না পারে সেজন্য নিচের কোন ডিভাইসটি ব্যবহার করা হয়?", options: ["ব্রাস এলবো", "পিয়ার্সিং ভাল্ব", "ফ্ল্যাশ ব্যাক অ্যারেস্টর", "স্পার্ক লাইটার"], correct: 2 },
+      { id: 50, question: "অক্সি-অ্যাসিটিলিন গ্যাস দিয়ে ব্রেজিং করতে হলে কোন শিখা ব্যবহার করা হয়?", options: ["কার্বরাইজিং শিখা", "নিউট্রাল শিখা", "অক্সিডাইজিং শিখা", "যে কোন একটি হলেই হবে"], correct: 1 },
+      { id: 51, question: "ব্রেজিং শিখার তাপমাত্রা কত?", options: ["১০০-২০০ ডিগ্রি সেলসিয়াস", "২০০-৩৫০ ডিগ্রি সেলসিয়াস", "৩৫০-৪৫০ ডিগ্রি সেলসিয়াস", "৪৫০ ডিগ্রি সেলসিয়াস বেশি"], correct: 3 },
+      { id: 52, question: "নন-ফ্রস্ট রেফ্রিজারেটরের কুলিং কয়েলে বরফ জমার কারণ কী?", options: ["হিটার চলে না", "রেফ্রিজারেন্ট বেশি চার্জ হয়েছে", "কুলিং ফ্যান চলে না", "রেফ্রিজারেটরের মালামাল কম"], correct: 0 },
+      { id: 53, question: "রেফ্রিজারেশন সিস্টেমে দুইটি কম্প্রেসর কখন ব্যবহার করতে হয়?", options: ["তাপমাত্রা ৩ ডিগ্রি সেলসিয়াস দরকার হলে", "তাপমাত্রা -৩ ডিগ্রি সেলসিয়াস দরকার হলে", "তাপমাত্রা -৫ ডিগ্রি সেলসিয়াস দরকার হলে", "তাপমাত্রা -৫০ ডিগ্রি সেলসিয়াস দরকার হলে"], correct: 3 },
+      { id: 54, question: "ফ্রিজারের তাপমাত্রা কত থাকে?", options: ["-৫° C থেকে -১৫° C", "১৮° C থেকে -২২° C", "-১৫° C থেকে -৩০° C", "০° C থেকে -১৫° C"], correct: 1 },
+      { id: 55, question: "কপার টিউবের সাথে কপার টিউব ব্রেজিং করে জোড়া দেওয়ার জন্য নিচের কোন ধরণের রড ব্যবহার করা হয়?", options: ["সিলভার ফসফরাস অ্যালয়", "অ্যালুমিনিয়াম অ্যালয়", "পিতল অ্যালয়", "সবগুলোই"], correct: 0 },
+      { id: 56, question: "রেফ্রিজারেটরের কম্প্রেসর মোটরে ক্যাপাসিটর কেন ব্যবহার করা হয়?", options: ["শর্ট সার্কিট না ঘটার", "কম্প্রেসরের পাম্পিং কম করার জন্য", "সারফেস জয়েন্টের ক্ষেত্রে লিকপ্রুফ করার জন্য", "কম্প্রেসর মোটরকে শক্তি প্রদানের জন্য"], correct: 3 },
+      { id: 57, question: "একটি রেফ্রিজারেটরের ফ্রোজেন ফুড চেম্বারের তাপমাত্রা কত থাকা উচিত?", options: ["-১৮° C থেকে -২৩° C", "-১২° C থেকে -১৫° C", "-৬° C থেকে -৮° C", "২° C থেকে ৪.৫° C"], correct: 0 },
+      { id: 58, question: "R-134a রেফ্রিজারেন্ট ব্যবহৃত রেফ্রিজারেটরের অপারেটিং সাকশন প্রেশার কত?", options: ["৩ থেকে ৮ পিএসআই", "৩ থেকে ৮ কেজি/সেমি২", "০ পিএসআই", "০ পিএসআই এর নিচে"], correct: 0 },
+      { id: 59, question: "রেফ্রিজারেন্ট রিকভারি করার উদ্দেশ্য কী?", options: ["রেফ্রিজারেন্ট পুনঃ ব্যবহার", "ওজন স্তর ক্ষয় রোধ", "গ্লোবাল ওয়ার্মিং বৃদ্ধি", "রেফ্রিজারেন্ট সংরক্ষণ"], correct: 0 },
+      { id: 60, question: "সোল্ডারিং করার সময় যাতে হাত পুড়ে না যায়, সেজন্য সতর্কতামূলক ভাবে কোন পিপিইটি ব্যবহার করা উচিৎ?", options: ["সেফটি গগলস", "সেফটি স্যু", "বয়লার স্যুট", "সেফটি হ্যান্ড গ্লোভস"], correct: 3 },
+      { id: 61, question: "কোন রেফ্রিজারেন্টটি ওজোন স্তর ক্ষয়ের জন্য বহুলাংশে দায়ী?", options: ["R-600a", "R-134a", "R-22", "R-290"], correct: 2 },
+      { id: 62, question: "রেফ্রিজারেশন ইউনিট Deep Vacuum করতে হলে কত Micron পর্যন্ত Vacuum করতে হয়?", options: ["500 Micron", "1500 Micron", "760 Micron", "1800 Micron"], correct: 0 },
+      { id: 63, question: "অ্যাসিটিলিন সিলিন্ডার এর রং কোনটি?", options: ["মেরুন", "সবুজ", "কালো", "নীল"], correct: 0 },
+      { id: 64, question: "নিচের কোন টুলসটি পাওয়ার টুলস?", options: ["টিউব বেন্ডার", "ক্যাপিলারি কাটার", "কম্বিনেশন প্লায়ার", "ইলেকট্রনিক হ্যামার ড্রিল"], correct: 3 },
+      { id: 65, question: "টিউবকে সোজা করতে কোন টুলস ব্যবহার করতে হয়?", options: ["ম্যালেট হ্যামার ও স্প্রিং টিউব বেন্ডার", "ম্যালেট হ্যামার ও স্প্রিং টিউব বেন্ডার", "বলপিন হ্যামার ও স্প্রিং টিউব বেন্ডার", "ক্রস পিন হ্যামার ও মেকানিক্যাল টিউব বেন্ডার"], correct: 0 },
+      { id: 66, question: "অক্সি-অ্যাসিটিলিন গ্যাস দিয়ে তৈরি শিখা কত ধরণের?", options: ["২ ধরণের", "৩ ধরণের", "৪ ধরণের", "৫ ধরণের"], correct: 1 },
+      { id: 67, question: "লকক্রেশপ (সিল্যান্ট) ব্যবহারের কারণ কী?", options: ["নকক্রিং সহজে প্রবেশ করানোর জন্য", "সঠিক মার্কিং এর জন্য", "জয়েন্টে লিকপ্রুফ করার জন্য", "\"ড\" এর সঠিক ব্যবহারের জন্য"], correct: 2 },
+      { id: 68, question: "কোন একটি কম্প্রেশরের বৈদ্যুতিক ক্ষমতা ১১০ Watt এবং সাপ্লাই ভোল্টেজ ২২০ V কারেন্ট কত হতে পারে?", options: ["প্রায় ১.৫ অ্যাম্পস", "প্রায় ১ অ্যাম্পস", "প্রায় ২ অ্যাম্পস", "প্রায় ০.৫ অ্যাম্পস"], correct: 3 },
+      { id: 69, question: "ড্রাইসেল (ব্যাটারী) থেকে কোন ধরনের বিদ্যুৎ পাওয়া যায়?", options: ["এসি প্রবাহ", "ডিসি প্রবাহ", "স্থির বিদ্যুৎ", "কোনোটিই নয়"], correct: 1 },
+      { id: 70, question: "তারের দৈর্ঘ্য বাড়লে রেজিস্ট্যান্স -", options: ["বৃদ্ধি পায়", "হ্রাস পায়", "একই থাকে", "শূন্য হয়ে যায়"], correct: 0 },
+      { id: 71, question: "আবাসিক রেফ্রিজারেটরের নন-ইনভার্টার কম্প্রেশর মোটরের কোন দুইটি ইলেকট্রিক্যাল টার্মিনালদ্বয়ের মধ্যে সর্বোচ্চ রেজিস্ট্যান্স থাকে?", options: ["কমন ও স্টার্ট টার্মিনাল", "কমন ও রান টার্মিনাল", "স্টার্ট ও রান টার্মিনাল", "সবগুলো একই থাকে"], correct: 2 },
+      { id: 72, question: "১ সি এফ টি সমান কত লিটার?", options: ["১০ লিটার", "২০ লিটার", "২৮.৩১ লিটার", "২৮ লিটার"], correct: 2 },
+      { id: 73, question: "রেফ্রিজারেটরের ইউনিট বায়ুশূন্য (ভ্যাকুয়াম) করার পর যদি, প্রেশার গেজে চাপ বৃদ্ধি দেখা যায় তাহলে কী বোঝা যাবে?", options: ["ইউনিটে লিক আছে", "ইউনিট চকড হয়েছে", "ইউনিটে ময়লা আছে", "কম্প্রেশরের পাম্পিং কম"], correct: 0 }
     ];
 
-    let userAnswers = {};
-    let currentUser = null;
-    let currentFilter = 'all';
-
+    // Bengali digits translation helper
     function toBengaliNumber(num) {
       const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-      return String(num).replace(/[0-9]/g, d => bnDigits[d]);
+      return num.toString().replace(/\d/g, d => bnDigits[parseInt(d, 10)]);
     }
 
-    function renderQuiz() {
-      const container = document.getElementById('quizContainer');
-      container.innerHTML = '';
+    // App State Management
+    let userAnswers = {};
+    let currentFilter = 'all';
+    let isAdmin = localStorage.getItem('tasin_admin') === 'true';
+    let currentUser = JSON.parse(localStorage.getItem('rac_current_user') || 'null');
+    let examStartTime = null;
 
-      const filteredQuestions = questions.filter(item => {
-        const a = userAnswers[item.id];
-        if (currentFilter === 'unanswered') return a === undefined;
-        if (currentFilter === 'correct') return a !== undefined && a === item.correct;
-        if (currentFilter === 'wrong') return a !== undefined && a !== item.correct;
-        return true;
-      });
+    const MAX_DAILY_ATTEMPTS = 2;
+    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+    let countdownInterval = null;
 
-      if (filteredQuestions.length === 0) {
-        container.innerHTML = `<div class="p-8 text-center bg-white rounded-xl border border-slate-200 text-slate-400 text-sm">এই ক্যাটাগরিতে কোনো প্রশ্ন নেই।</div>`;
-        return;
-      }
-
-      filteredQuestions.forEach(item => {
-        const card = document.createElement('div');
-        card.id = `qCard_${item.id}`;
-        card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-xs transition-all";
-
-        const a = userAnswers[item.id];
-        const isAnswered = a !== undefined;
-        let statusTag = '';
-
-        if (isAnswered) {
-          if (a === item.correct) {
-            statusTag = `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-2.5 py-1 rounded-md">✓ সঠিক উত্তর</span>`;
-          } else {
-            statusTag = `<span class="bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold px-2.5 py-1 rounded-md">✕ ভুল উত্তর</span>`;
-          }
-        }
-
-        let html = `
-          <div class="flex items-start justify-between gap-3 mb-4">
-            <h3 class="text-base font-bold text-slate-900 leading-snug">
-              ${toBengaliNumber(item.id)}। ${item.q}
-            </h3>
-            ${statusTag}
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        `;
-
-        const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
-        item.options.forEach((opt, optIndex) => {
-          let btnClass = "bg-slate-50/70 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300";
-          let badgeClass = "bg-slate-200/80 text-slate-600";
-
-          if (isAnswered) {
-            if (optIndex === item.correct) {
-              btnClass = "bg-emerald-50 border-emerald-500 text-emerald-950 font-bold ring-1 ring-emerald-500";
-              badgeClass = "bg-emerald-600 text-white";
-            } else if (a === optIndex) {
-              btnClass = "bg-rose-50 border-rose-500 text-rose-950 font-semibold ring-1 ring-rose-500";
-              badgeClass = "bg-rose-600 text-white";
-            } else {
-              btnClass = "opacity-50 border-slate-200 bg-slate-50 text-slate-500 cursor-not-allowed";
-            }
-          }
-
-          html += `
-            <button type="button" ${isAnswered ? 'disabled' : ''} onclick="selectAnswer(${item.id}, ${optIndex})" class="w-full text-left text-sm px-3.5 py-3 rounded-xl border flex items-center gap-2.5 transition-all ${btnClass}">
-              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${badgeClass}">${prefixes[optIndex]}</span>
-              <span>${opt}</span>
-            </button>
-          `;
-        });
-
-        html += `</div>`;
-        card.innerHTML = html;
-        container.appendChild(card);
-      });
-
-      updateStats();
-    }
-
-    function selectAnswer(qId, optIndex) {
-      if (userAnswers[qId] !== undefined) return;
-      userAnswers[qId] = optIndex;
-      renderQuiz();
-    }
-
-    function updateStats() {
-      let correct = 0;
-      let wrong = 0;
-      questions.forEach(q => {
-        const a = userAnswers[q.id];
-        if (a !== undefined) {
-          if (a === q.correct) correct++;
-          else wrong++;
-        }
-      });
-
-      const answered = Object.keys(userAnswers).length;
-      document.getElementById('scoreBadge').textContent = toBengaliNumber(correct);
-      document.getElementById('answeredCountBadge').textContent = `${toBengaliNumber(answered)}/${toBengaliNumber(questions.length)}`;
-      document.getElementById('unansweredCount').textContent = toBengaliNumber(questions.length - answered);
-      document.getElementById('correctFilterCount').textContent = toBengaliNumber(correct);
-      document.getElementById('wrongFilterCount').textContent = toBengaliNumber(wrong);
-
-      const progressPct = (answered / questions.length) * 100;
-      document.getElementById('progressBar').style.width = `${progressPct}%`;
-    }
-
-    function setFilter(type) {
-      currentFilter = type;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.className = "filter-btn bg-white border border-slate-200 text-slate-700 font-medium px-3 py-1 rounded-md text-xs";
-      });
-      if (type === 'all') document.getElementById('filterAll').className = "filter-btn bg-sky-600 text-white font-bold px-3 py-1 rounded-md text-xs";
-      if (type === 'unanswered') document.getElementById('filterUnanswered').className = "filter-btn bg-sky-600 text-white font-bold px-3 py-1 rounded-md text-xs";
-      if (type === 'correct') document.getElementById('filterCorrect').className = "filter-btn bg-emerald-600 text-white font-bold px-3 py-1 rounded-md text-xs";
-      if (type === 'wrong') document.getElementById('filterWrong').className = "filter-btn bg-rose-600 text-white font-bold px-3 py-1 rounded-md text-xs";
-      renderQuiz();
-    }
+    // Google Sheets Web App Endpoint (Configurable via Admin)
+    let SHEET_WEBAPP_URL = localStorage.getItem('rac_sheet_url') || '';
 
     function sendDataToGoogleSheet(payload) {
-      const sheetUrl = localStorage.getItem('rac_sheet_url') || PERMANENT_SHEET_URL;
-      if (!sheetUrl) return;
+      if (!SHEET_WEBAPP_URL) return;
+      const banner = document.getElementById('syncBanner');
+      const text = document.getElementById('syncText');
+      banner.classList.remove('hidden');
+      text.textContent = "📡 গুগল শিটে ডাটা পাঠানো হচ্ছে...";
 
-      fetch(sheetUrl, {
+      fetch(SHEET_WEBAPP_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).catch(err => console.log(err));
+      }).then(() => {
+        text.textContent = "✓ গুগল শিটে লাইভ ডাটা সংরক্ষিত হয়েছে!";
+        setTimeout(() => banner.classList.add('hidden'), 3500);
+      }).catch(err => {
+        text.textContent = "⚠️ শিটে সিঙ্ক হতে পারেনি (ইন্টারনেট চেক করুন)";
+        setTimeout(() => banner.classList.add('hidden'), 3500);
+      });
     }
 
-    document.getElementById('studentForm').addEventListener('submit', (e) => {
+    function checkStudentProfile() {
+      if (!currentUser) {
+        document.getElementById('studentModal').classList.remove('hidden');
+      } else {
+        document.getElementById('studentModal').classList.add('hidden');
+        document.getElementById('studentPill').classList.remove('hidden');
+        document.getElementById('studentPillName').textContent = currentUser.name;
+      }
+    }
+
+    function handleStartExamWithStudent(e) {
       e.preventDefault();
       const name = document.getElementById('studentNameInput').value.trim();
       const info = document.getElementById('studentInfoInput').value.trim();
+
       if (!name || !info) return;
 
       currentUser = { name, info };
-      localStorage.setItem('rac_user', JSON.stringify(currentUser));
-      document.getElementById('studentPillName').textContent = name;
+      localStorage.setItem('rac_current_user', JSON.stringify(currentUser));
       document.getElementById('studentModal').classList.add('hidden');
+      document.getElementById('studentPill').classList.remove('hidden');
+      document.getElementById('studentPillName').textContent = currentUser.name;
 
+      examStartTime = new Date().toLocaleString('bn-BD', { timeZone: 'Asia/Dhaka' });
+
+      // Send Started Log to Google Sheet
       sendDataToGoogleSheet({
         time: new Date().toLocaleString(),
         name: currentUser.name,
         roll: currentUser.info,
         status: 'পরীক্ষা শুরু করেছে',
-        score: `০ / ${questions.length}`,
+        score: '০ / ৭৩',
         percentage: '০%'
       });
-    });
+    }
 
-    document.getElementById('finishExamBtn').addEventListener('click', () => {
+    function handleChangeUser() {
+      currentUser = null;
+      localStorage.removeItem('rac_current_user');
+      document.getElementById('studentNameInput').value = '';
+      document.getElementById('studentInfoInput').value = '';
+      document.getElementById('studentPill').classList.add('hidden');
+      checkStudentProfile();
+    }
+
+    function submitFinalExam() {
       let correct = 0;
       let wrong = 0;
-
-      questions.forEach(q => {
+      questionsData.forEach(q => {
         const a = userAnswers[q.id];
         if (a !== undefined) {
           if (a === q.correct) correct++;
@@ -416,7 +503,7 @@
         }
       });
 
-      const total = questions.length;
+      const total = questionsData.length;
       const pct = Math.round((correct / total) * 100);
 
       document.getElementById('resName').textContent = currentUser ? currentUser.name : 'পরীক্ষার্থী';
@@ -426,62 +513,458 @@
 
       document.getElementById('resultModal').classList.remove('hidden');
 
+      // Send Finished Log to Google Sheet
       if (currentUser) {
         sendDataToGoogleSheet({
           time: new Date().toLocaleString(),
           name: currentUser.name,
           roll: currentUser.info,
           status: 'পরীক্ষা সম্পন্ন (Finished)',
-          score: `${toBengaliNumber(correct)} / ${toBengaliNumber(total)}`,
-          percentage: `${toBengaliNumber(pct)}%`
+          score: `${correct} / ${total}`,
+          percentage: `${pct}%`
         });
       }
-    });
-
-    document.getElementById('restartExamBtn').addEventListener('click', () => {
-      if (confirm('তুমি কি নতুন করে পরীক্ষা শুরু করতে চাও?')) {
-        userAnswers = {};
-        renderQuiz();
-      }
-    });
-
-    document.getElementById('closeResultBtn').addEventListener('click', () => {
-      document.getElementById('resultModal').classList.add('hidden');
-    });
-
-    document.getElementById('changeStudentBtn').addEventListener('click', () => {
-      document.getElementById('studentModal').classList.remove('hidden');
-    });
-
-    document.getElementById('adminBtn').addEventListener('click', () => {
-      const pass = prompt('অ্যাডমিন পাসওয়ার্ড লিখুন:');
-      if (pass === 'rifat tasin' || pass === 'admin') {
-        document.getElementById('adminSheetUrlInput').value = localStorage.getItem('rac_sheet_url') || PERMANENT_SHEET_URL;
-        document.getElementById('adminModal').classList.remove('hidden');
-      } else if (pass !== null) {
-        alert('ভুল পাসওয়ার্ড!');
-      }
-    });
-
-    document.getElementById('closeAdminBtn').addEventListener('click', () => {
-      document.getElementById('adminModal').classList.add('hidden');
-    });
-
-    document.getElementById('saveAdminSheetBtn').addEventListener('click', () => {
-      const val = document.getElementById('adminSheetUrlInput').value.trim();
-      localStorage.setItem('rac_sheet_url', val);
-      document.getElementById('adminModal').classList.add('hidden');
-      alert('লিংক সফলভাবে সেভ করা হয়েছে!');
-    });
-
-    const savedUser = localStorage.getItem('rac_user');
-    if (savedUser) {
-      currentUser = JSON.parse(savedUser);
-      document.getElementById('studentPillName').textContent = currentUser.name;
-      document.getElementById('studentModal').classList.add('hidden');
     }
 
-    renderQuiz();
+    function closeResultModal() {
+      document.getElementById('resultModal').classList.add('hidden');
+    }
+
+    function saveScriptUrl() {
+      const url = document.getElementById('scriptUrlInput').value.trim();
+      SHEET_WEBAPP_URL = url;
+      localStorage.setItem('rac_sheet_url', url);
+      const st = document.getElementById('saveUrlStatus');
+      st.classList.remove('hidden');
+      updateSheetBadge();
+      setTimeout(() => st.classList.add('hidden'), 2500);
+    }
+
+    function updateSheetBadge() {
+      const badge = document.getElementById('currentSheetStatusBadge');
+      if (SHEET_WEBAPP_URL) {
+        badge.className = "font-bold text-emerald-600 flex items-center gap-1";
+        badge.innerHTML = "✓ সক্রিয় (সংযুক্ত আছে)";
+      } else {
+        badge.className = "font-bold text-rose-600";
+        badge.textContent = "⚠️ লিংক সংযুক্ত নেই";
+      }
+    }
+
+    function getValidAttempts() {
+      const raw = localStorage.getItem('rac_attempts_timestamps');
+      if (!raw) return [];
+      const now = Date.now();
+      try {
+        const timestamps = JSON.parse(raw);
+        const valid = timestamps.filter(ts => (now - ts) < TWENTY_FOUR_HOURS);
+        if (valid.length !== timestamps.length) {
+          localStorage.setItem('rac_attempts_timestamps', JSON.stringify(valid));
+        }
+        return valid;
+      } catch(e) {
+        return [];
+      }
+    }
+
+    function recordNewAttempt() {
+      if (isAdmin) return; // Admin is unlimited
+      const attempts = getValidAttempts();
+      attempts.push(Date.now());
+      localStorage.setItem('rac_attempts_timestamps', JSON.stringify(attempts));
+      updateAttemptUI();
+    }
+
+    function updateAttemptUI() {
+      const badge = document.getElementById('attemptBadge');
+      const adminTxt = document.getElementById('adminStatusText');
+      const adminIcon = document.getElementById('adminLockIcon');
+
+      if (isAdmin) {
+        badge.className = "text-xs font-bold px-2.5 py-1 rounded-lg border bg-amber-50 text-amber-800 border-amber-300 flex items-center gap-1 shadow-sm";
+        badge.innerHTML = "👑 অ্যাডমিন মুড অন (আনলিমিটেড পরীক্ষা)";
+        adminTxt.textContent = "অ্যাডমিন (Active)";
+        adminIcon.textContent = "👑";
+        return;
+      }
+
+      adminTxt.textContent = "অ্যাডমিন এক্সেস ও শিট সেটআপ";
+      adminIcon.textContent = "🔒";
+
+      const attempts = getValidAttempts();
+      const left = Math.max(0, MAX_DAILY_ATTEMPTS - attempts.length);
+
+      if (left > 0) {
+        badge.className = "text-xs font-bold px-2.5 py-1 rounded-lg border bg-emerald-50 text-emerald-800 border-emerald-300 flex items-center gap-1 shadow-sm";
+        badge.innerHTML = `🎯 সুযোগ বাকি: ${toBengaliNumber(left)}/${toBengaliNumber(MAX_DAILY_ATTEMPTS)}`;
+      } else {
+        badge.className = "text-xs font-bold px-2.5 py-1 rounded-lg border bg-rose-50 text-rose-800 border-rose-300 flex items-center gap-1 shadow-sm";
+        badge.innerHTML = `⚠️ আজকের সুযোগ শেষ (${toBengaliNumber(MAX_DAILY_ATTEMPTS)}/${toBengaliNumber(MAX_DAILY_ATTEMPTS)})`;
+      }
+    }
+
+    function canTakeExam() {
+      if (isAdmin) return true;
+      const attempts = getValidAttempts();
+      return attempts.length < MAX_DAILY_ATTEMPTS;
+    }
+
+    function showCountdownForNextAttempt() {
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      const updateTimer = () => {
+        const attempts = getValidAttempts();
+        if (attempts.length === 0) {
+          closeLimitModal();
+          updateAttemptUI();
+          return;
+        }
+        const oldestAttempt = Math.min(...attempts);
+        const nextAvailableTime = oldestAttempt + TWENTY_FOUR_HOURS;
+        const remainingMs = nextAvailableTime - Date.now();
+
+        if (remainingMs <= 0) {
+          clearInterval(countdownInterval);
+          updateAttemptUI();
+          closeLimitModal();
+          return;
+        }
+
+        const hours = Math.floor(remainingMs / (1000 * 60 * 60));
+        const mins = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((remainingMs % (1000 * 60)) / 1000);
+
+        const pad = (n) => n.toString().padStart(2, '0');
+        const timerEl = document.getElementById('countdownTimer');
+        if (timerEl) {
+          timerEl.textContent = `${toBengaliNumber(pad(hours))}:${toBengaliNumber(pad(mins))}:${toBengaliNumber(pad(secs))}`;
+        }
+      };
+
+      updateTimer();
+      countdownInterval = setInterval(updateTimer, 1000);
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
+
+      const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
+      let visibleCount = 0;
+
+      questionsData.forEach((item) => {
+        const isAnswered = userAnswers[item.id] !== undefined;
+        const selectedOpt = userAnswers[item.id];
+        const isCorrect = isAnswered && selectedOpt === item.correct;
+
+        // Filtering check
+        if (currentFilter === 'unanswered' && isAnswered) return;
+        if (currentFilter === 'correct' && (!isAnswered || !isCorrect)) return;
+        if (currentFilter === 'incorrect' && (!isAnswered || isCorrect)) return;
+
+        visibleCount++;
+
+        const card = document.createElement('div');
+        card.id = `q-card-${item.id}`;
+        card.className = "bg-white border border-slate-200 hover:border-slate-300 rounded-2xl p-4 sm:p-5 transition shadow-sm";
+
+        // Question Title and Status Badge
+        const header = document.createElement('div');
+        header.className = "flex items-start justify-between gap-3 mb-3.5";
+
+        const qText = document.createElement('h3');
+        qText.className = "text-base sm:text-lg font-bold text-slate-900 leading-relaxed";
+        qText.textContent = `${toBengaliNumber(item.id)}। ${item.question}`;
+        header.appendChild(qText);
+
+        if (isAnswered) {
+          const badge = document.createElement('span');
+          badge.className = isCorrect 
+            ? "inline-flex items-center gap-1 text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 rounded-full whitespace-nowrap shadow-xs"
+            : "inline-flex items-center gap-1 text-xs font-bold text-rose-800 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full whitespace-nowrap shadow-xs";
+          badge.textContent = isCorrect ? "✓ সঠিক উত্তর" : "✗ ভুল উত্তর";
+          header.appendChild(badge);
+        }
+
+        card.appendChild(header);
+
+        // Options Layout Grid
+        const optionsGrid = document.createElement('div');
+        optionsGrid.className = "grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-2";
+
+        item.options.forEach((optText, optIdx) => {
+          const btn = document.createElement('button');
+          btn.type = "button";
+          btn.disabled = isAnswered;
+
+          let btnClasses = "w-full text-left p-3.5 rounded-xl border text-sm sm:text-base font-semibold transition flex items-start gap-3 ";
+
+          if (!isAnswered) {
+            btnClasses += "border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-sky-300 text-slate-800 cursor-pointer active:scale-[0.99]";
+          } else {
+            btnClasses += "cursor-default ";
+            if (optIdx === item.correct) {
+              btnClasses += "border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm ring-1 ring-emerald-500 font-bold";
+            } else if (optIdx === selectedOpt && !isCorrect) {
+              btnClasses += "border-rose-500 bg-rose-50 text-rose-900 line-through ring-1 ring-rose-500 font-bold";
+            } else {
+              btnClasses += "border-slate-200 bg-slate-100 text-slate-400 opacity-60";
+            }
+          }
+
+          btn.className = btnClasses;
+
+          // Prefix (ক, খ, গ, ঘ)
+          const prefixSpan = document.createElement('span');
+          let prefixClasses = "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 ";
+
+          if (isAnswered && optIdx === item.correct) {
+            prefixClasses += "bg-emerald-600 text-white";
+          } else if (isAnswered && optIdx === selectedOpt && !isCorrect) {
+            prefixClasses += "bg-rose-600 text-white";
+          } else {
+            prefixClasses += "bg-slate-200 text-slate-700";
+          }
+          prefixSpan.className = prefixClasses;
+          prefixSpan.textContent = prefixes[optIdx] || (optIdx + 1);
+
+          const textSpan = document.createElement('span');
+          textSpan.className = "flex-1";
+          textSpan.textContent = optText;
+
+          btn.appendChild(prefixSpan);
+          btn.appendChild(textSpan);
+
+          btn.onclick = () => handleAnswerSelect(item.id, optIdx);
+          optionsGrid.appendChild(btn);
+        });
+
+        card.appendChild(optionsGrid);
+        container.appendChild(card);
+      });
+
+      const emptyNotice = document.getElementById('emptyNotice');
+      if (visibleCount === 0) {
+        emptyNotice.classList.remove('hidden');
+      } else {
+        emptyNotice.classList.add('hidden');
+      }
+
+      updateLiveStats();
+      renderPalette();
+    }
+
+    function handleAnswerSelect(questionId, optionIndex) {
+      if (userAnswers[questionId] !== undefined) return;
+      
+      // Check attempt permission on first answer
+      if (Object.keys(userAnswers).length === 0) {
+        if (!canTakeExam()) {
+          showLimitModal();
+          return;
+        }
+      }
+
+      userAnswers[questionId] = optionIndex;
+      renderQuiz();
+    }
+
+    function updateLiveStats() {
+      let correctCount = 0;
+      let wrongCount = 0;
+      const total = questionsData.length;
+
+      questionsData.forEach(q => {
+        const ans = userAnswers[q.id];
+        if (ans !== undefined) {
+          if (ans === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        }
+      });
+
+      const answeredCount = correctCount + wrongCount;
+      const remainingCount = total - answeredCount;
+
+      document.getElementById('scoreText').textContent = toBengaliNumber(correctCount);
+      document.getElementById('answeredText').textContent = toBengaliNumber(answeredCount);
+
+      document.getElementById('countUnanswered').textContent = toBengaliNumber(remainingCount);
+      document.getElementById('countCorrect').textContent = toBengaliNumber(correctCount);
+      document.getElementById('countIncorrect').textContent = toBengaliNumber(wrongCount);
+
+      const percent = (answeredCount / total) * 100;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      const buttons = {
+        all: document.getElementById('btnFilterAll'),
+        unanswered: document.getElementById('btnFilterUnanswered'),
+        correct: document.getElementById('btnFilterCorrect'),
+        incorrect: document.getElementById('btnFilterIncorrect')
+      };
+
+      Object.values(buttons).forEach(btn => {
+        btn.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+        if (btn.id === 'btnFilterAll') {
+          btn.classList.add('bg-slate-100', 'text-slate-700');
+        }
+      });
+
+      if (filter === 'all') {
+        buttons.all.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+        buttons.all.classList.remove('bg-slate-100', 'text-slate-700');
+      } else {
+        buttons[filter].classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+      }
+
+      renderQuiz();
+    }
+
+    function toggleNavModal() {
+      const modal = document.getElementById('navModal');
+      modal.classList.toggle('hidden');
+    }
+
+    function renderPalette() {
+      const palette = document.getElementById('paletteGrid');
+      palette.innerHTML = '';
+
+      questionsData.forEach(q => {
+        const btn = document.createElement('button');
+        const isAns = userAnswers[q.id] !== undefined;
+        const isCorr = isAns && userAnswers[q.id] === q.correct;
+
+        let style = "py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer ";
+        if (!isAns) {
+          style += "bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300";
+        } else if (isCorr) {
+          style += "bg-emerald-600 text-white border-emerald-600 shadow-xs";
+        } else {
+          style += "bg-rose-600 text-white border-rose-600 shadow-xs";
+        }
+
+        btn.className = style;
+        btn.textContent = toBengaliNumber(q.id);
+        btn.onclick = () => {
+          toggleNavModal();
+          if (currentFilter !== 'all') {
+            setFilter('all');
+          }
+          setTimeout(() => {
+            const el = document.getElementById(`q-card-${q.id}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              el.classList.add('ring-2', 'ring-sky-500');
+              setTimeout(() => el.classList.remove('ring-2', 'ring-sky-500'), 1600);
+            }
+          }, 100);
+        };
+        palette.appendChild(btn);
+      });
+    }
+
+    function confirmReset() {
+      if (!canTakeExam()) {
+        showLimitModal();
+        return;
+      }
+      document.getElementById('confirmModal').classList.remove('hidden');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.add('hidden');
+    }
+
+    function executeReset() {
+      closeConfirmModal();
+      if (!canTakeExam()) {
+        showLimitModal();
+        return;
+      }
+      recordNewAttempt();
+      userAnswers = {};
+      currentFilter = 'all';
+      setFilter('all');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      renderQuiz();
+    }
+
+    function showLimitModal() {
+      showCountdownForNextAttempt();
+      document.getElementById('limitModal').classList.remove('hidden');
+    }
+
+    function closeLimitModal() {
+      document.getElementById('limitModal').classList.add('hidden');
+      if (countdownInterval) clearInterval(countdownInterval);
+    }
+
+    function handleAdminButtonClick() {
+      if (isAdmin) {
+        openAdminMenu();
+      } else {
+        openAdminModal();
+      }
+    }
+
+    function openAdminModal() {
+      document.getElementById('adminPinInput').value = '';
+      document.getElementById('adminErrorMsg').classList.add('hidden');
+      document.getElementById('adminModal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('adminPinInput').focus(), 150);
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function openAdminMenu() {
+      document.getElementById('scriptUrlInput').value = SHEET_WEBAPP_URL;
+      updateSheetBadge();
+      document.getElementById('adminMenuModal').classList.remove('hidden');
+    }
+
+    function closeAdminMenuModal() {
+      document.getElementById('adminMenuModal').classList.add('hidden');
+    }
+
+    function submitAdminPin() {
+      const pin = document.getElementById('adminPinInput').value.trim().toLowerCase();
+      if (pin === 'rifat tasin') {
+        isAdmin = true;
+        localStorage.setItem('tasin_admin', 'true');
+        closeAdminModal();
+        updateAttemptUI();
+        openAdminMenu(); // Directly show the Sheet Configuration Panel
+      } else {
+        document.getElementById('adminErrorMsg').classList.remove('hidden');
+      }
+    }
+
+    function adminLogout() {
+      isAdmin = false;
+      localStorage.removeItem('tasin_admin');
+      closeAdminMenuModal();
+      updateAttemptUI();
+    }
+
+    function adminResetDeviceAttempts() {
+      localStorage.removeItem('rac_attempts_timestamps');
+      closeAdminMenuModal();
+      updateAttemptUI();
+    }
+
+    window.onload = () => {
+      updateAttemptUI();
+      checkStudentProfile();
+      updateSheetBadge();
+      renderQuiz();
+    };
   </script>
 </body>
 </html>

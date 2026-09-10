@@ -57,7 +57,7 @@
     <div class="flex justify-center mb-6 overflow-x-auto pb-1">
       <div class="bg-slate-200/80 p-1.5 rounded-xl inline-flex gap-1.5 border border-slate-300/60 shadow-inner">
         <button id="tab_mcq" onclick="switchTestType('mcq')" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-xs">
-          MCQ (৭২টি)
+          MCQ (৭৩টি)
         </button>
         <button id="tab_tf" onclick="switchTestType('tf')" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-950">
           সত্য/মিথ্যা (২৯টি)
@@ -80,10 +80,10 @@
     <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-4 flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-2">
         <div class="bg-sky-50 border border-sky-200 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1">
-          স্কোর: <span id="scoreBadge">০</span> / <span id="totalQuestionsBadge">৭২</span>
+          স্কোর: <span id="scoreBadge">০</span> / <span id="totalQuestionsBadge">৭৩</span>
         </div>
         <div class="text-slate-600 text-xs font-medium px-2 py-1.5">
-          উত্তর সম্পন্ন: <span id="answeredCountBadge" class="font-bold text-slate-800">০ / ৭২</span>
+          উত্তর সম্পন্ন: <span id="answeredCountBadge" class="font-bold text-slate-800">০ / ৭৩</span>
         </div>
         <div class="bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1">
           🎯 সুযোগ বাকি: <span id="attemptsLeftBadge">২/২</span>
@@ -108,8 +108,8 @@
     <!-- FILTER BAR -->
     <div class="flex items-center gap-2 mb-5 overflow-x-auto pb-1 text-xs">
       <span class="text-slate-400 font-medium">ফিল্টার:</span>
-      <button onclick="setFilter('all')" id="filterAll" class="filter-btn bg-sky-600 text-white font-bold px-3 py-1 rounded-md">সবগুলো (<span id="totalFilterCount">৭২</span>)</button>
-      <button onclick="setFilter('unanswered')" id="filterUnanswered" class="filter-btn bg-white border border-slate-200 text-slate-700 font-medium px-3 py-1 rounded-md">উত্তর বাকি (<span id="unansweredCount">৭২</span>)</button>
+      <button onclick="setFilter('all')" id="filterAll" class="filter-btn bg-sky-600 text-white font-bold px-3 py-1 rounded-md">সবগুলো (<span id="totalFilterCount">৭৩</span>)</button>
+      <button onclick="setFilter('unanswered')" id="filterUnanswered" class="filter-btn bg-white border border-slate-200 text-slate-700 font-medium px-3 py-1 rounded-md">উত্তর বাকি (<span id="unansweredCount">৭৩</span>)</button>
       <button onclick="setFilter('correct')" id="filterCorrect" class="filter-btn bg-white border border-slate-200 text-emerald-700 font-medium px-3 py-1 rounded-md">সঠিক (<span id="correctFilterCount">০</span>)</button>
       <button onclick="setFilter('wrong')" id="filterWrong" class="filter-btn bg-white border border-slate-200 text-rose-700 font-medium px-3 py-1 rounded-md">ভুল (<span id="wrongFilterCount">০</span>)</button>
     </div>
@@ -186,7 +186,7 @@
   <script>
     const PERMANENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbxioPAFfiIxOqDiNKBiolri2tHiChsflsrGLzXaJG_TKk3cbcUKvKsvc-x6eZXEJ7moxA/exec";
 
-    // 1. MCQ QUESTIONS (72 ITEMS STRICTLY FROM SHEET, NO DUPLICATE)
+    // 1. MCQ QUESTIONS (EXACT 73 ITEMS AS PER SHEET)
     const mcqQuestions = [
       { id: 1, q: "লিক টেস্ট করার জন্য কোন পদ্ধতি জনপ্রিয়?", options: ["সাবান ফেনা", "পানি", "লিটমাস পেপার", "হাইড্রোমিটার"], correct: 0 },
       { id: 2, q: "যদি কোন রেফ্রিজারেটর চালু না হয় তাহলে সর্ব-প্রথমে কোনটি চেক করবে?", options: ["থার্মোস্ট্যাট", "কম্প্রেসর", "ক্যাপাসিটর", "পাওয়ার সাপ্লাই"], correct: 3 },
@@ -253,13 +253,14 @@
       { id: 63, q: "অ্যাসিটিলিন সিলিন্ডার এর রং কোনটি?", options: ["মেরুন", "সবুজ", "কালো", "নীল"], correct: 0 },
       { id: 64, q: "নিচের কোন টুলসটি পাওয়ার টুলস?", options: ["টিউব বেন্ডার", "ক্যাপিলারি কাটার", "কম্বিনেশন প্লায়ার", "ইলেকট্রনিক হ্যামার ড্রিল"], correct: 3 },
       { id: 65, q: "টিউবকে সোজা করতে কোন টুলস ব্যবহার করতে হয়?", options: ["ম্যালেটিং হ্যামার ও স্প্রিং টিউব বেন্ডার", "ম্যালেটিং হ্যামার ও স্প্রিং টিউব বেন্ডার", "বলপিন হ্যামার ও স্প্রিং টিউব বেন্ডার", "ক্রস পিন হ্যামার ও মেকানিক্যাল টিউব বেন্ডার"], correct: 0 },
-      { id: 66, q: "লকফ্রেশ (সিলান্টে) ব্যবহারের কারণ কী?", options: ["লিকপ্রুফ সারফেস করানো জন্য", "সঠিক মার্কিং এর জন্য", "জয়েন্টে লিকপ্রুফ করার জন্য", "\"ক\" এর সঠিক ব্যবহারের জন্য"], correct: 2 },
-      { id: 67, q: "কোন একটি কম্প্রেসরের বৈদ্যুতিক ক্ষমতা ১১০ Watt এবং সাপ্লাই ভোল্টেজ ২২০ V কারেন্ট কত হতে পারে?", options: ["প্রায় ১.৫ অ্যাম্পস", "প্রায় ১ অ্যাম্পস", "প্রায় ২ অ্যাম্পস", "প্রায় ০.৫ অ্যাম্পস"], correct: 3 },
-      { id: 68, q: "ড্রাইসেল (ব্যাটারী) থেকে কোন ধরণের বিদ্যুৎ পাওয়া যায়?", options: ["এসি প্রবাহ", "ডিসি প্রবাহ", "স্থির বিদ্যুৎ", "কোনোটিই নয়"], correct: 1 },
-      { id: 69, q: "তারের দৈর্ঘ্য বাড়লে রেজিস্ট্যান্স -", options: ["বৃদ্ধি পায়", "হ্রাস পায়", "একই থাকে", "শূন্য হয়ে যায়"], correct: 0 },
-      { id: 70, q: "আবাসিক রেফ্রিজারেটরের নন-ইনভার্টার কম্প্রেসর মোটরের কোন দুইটি ইলেকট্রিক্যাল টার্মিনালদ্বয়ের মধ্যে সর্বোচ্চ রেজিস্ট্যান্স থাকে?", options: ["কমন ও স্টার্ট টার্মিনাল", "কমন ও রান টার্মিনাল", "স্টার্ট ও রান টার্মিনাল", "সবগুলো একই থাকে"], correct: 2 },
-      { id: 71, q: "১ সি এফ টি সমান কত লিটার?", options: ["১০ লিটার", "২০ লিটার", "২৮.৩১ লিটার", "২৮ লিটার"], correct: 2 },
-      { id: 72, q: "রেফ্রিজারেটরের ইউনিট বায়ুশূন্য (ভ্যাকুয়াম) করার পর যদি, প্রেশার গেজে চাপ বৃদ্ধি দেখা যায় তাহলে কি বোঝা যাবে?", options: ["ইউনিটে লিক আছে", "ইউনিট চোকিং হয়েছে", "ইউনিটে ময়লা আছে", "কম্প্রেসরের পাম্পিং কম"], correct: 0 }
+      { id: 66, q: "অক্সি-অ্যাসিটিলিন গ্যাস দিয়ে তৈরি শিখা কত প্রকারের?", options: ["২ প্রকারের", "৩ প্রকারের", "৪ প্রকারের", "৫ প্রকারের"], correct: 1 },
+      { id: 67, q: "লকফ্রেশ (সিলান্টে) ব্যবহারের কারণ কী?", options: ["লিকপ্রুফ সারফেস করানো জন্য", "সঠিক মার্কিং এর জন্য", "জয়েন্টে লিকপ্রুফ করার জন্য", "\"ক\" এর সঠিক ব্যবহারের জন্য"], correct: 2 },
+      { id: 68, q: "কোন একটি কম্প্রেসরের বৈদ্যুতিক ক্ষমতা ১১০ Watt এবং সাপ্লাই ভোল্টেজ ২২০ V কারেন্ট কত হতে পারে?", options: ["প্রায় ১.৫ অ্যাম্পস", "প্রায় ১ অ্যাম্পস", "প্রায় ২ অ্যাম্পস", "প্রায় ০.৫ অ্যাম্পস"], correct: 3 },
+      { id: 69, q: "ড্রাইসেল (ব্যাটারী) থেকে কোন ধরণের বিদ্যুৎ পাওয়া যায়?", options: ["এসি প্রবাহ", "ডিসি প্রবাহ", "স্থির বিদ্যুৎ", "কোনোটিই নয়"], correct: 1 },
+      { id: 70, q: "তারের দৈর্ঘ্য বাড়লে রেজিস্ট্যান্স -", options: ["বৃদ্ধি পায়", "হ্রাস পায়", "একই থাকে", "শূন্য হয়ে যায়"], correct: 0 },
+      { id: 71, q: "আবাসিক রেফ্রিজারেটরের নন-ইনভার্টার কম্প্রেসর মোটরের কোন দুইটি ইলেকট্রিক্যাল টার্মিনালদ্বয়ের মধ্যে সর্বোচ্চ রেজিস্ট্যান্স থাকে?", options: ["কমন ও স্টার্ট টার্মিনাল", "কমন ও রান টার্মিনাল", "স্টার্ট ও রান টার্মিনাল", "সবগুলো একই থাকে"], correct: 2 },
+      { id: 72, q: "১ সি এফ টি সমান কত লিটার?", options: ["১০ লিটার", "২০ লিটার", "২৮.৩১ লিটার", "২৮ লিটার"], correct: 2 },
+      { id: 73, q: "রেফ্রিজারেটরের ইউনিট বায়ুশূন্য (ভ্যাকুয়াম) করার পর যদি, প্রেশার গেজে চাপ বৃদ্ধি দেখা যায় তাহলে কি বোঝা যাবে?", options: ["ইউনিটে লিক আছে", "ইউনিট চোকিং হয়েছে", "ইউনিটে ময়লা আছে", "কম্প্রেসরের পাম্পিং কম"], correct: 0 }
     ];
 
     // 2. TRUE/FALSE QUESTIONS (29 ITEMS)
